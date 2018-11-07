@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".onboarding.OnboardingGender">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/merriweather"
+        android:text="@string/onboarding_gender_text"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="50dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.sdsmdg.harjot.materialshadows.MaterialShadowViewWrapper
+            android:id="@+id/button_male_wrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="144dp"
+            android:layout_marginBottom="144dp"
+            app:shadowAlpha="0.6"
+            app:shadowOffsetY="-10"
+            tools:layout_editor_absoluteX="28dp">
+
+            <Button
+                android:id="@+id/button_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/onboard_gender_button_disabled"
+                android:elevation="10dp"
+                android:fontFamily="@font/merriweather"
+                android:shadowColor="#000"
+                android:text="Male"
+                android:textAllCaps="false"
+                android:textSize="26dp"
+
+                />
+        </com.sdsmdg.harjot.materialshadows.MaterialShadowViewWrapper>
+
+        <com.sdsmdg.harjot.materialshadows.MaterialShadowViewWrapper
+            android:id="@+id/button_female_wrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="144dp"
+            android:layout_marginBottom="144dp"
+            app:shadowAlpha="0.6"
+            app:shadowOffsetY="-10"
+            tools:layout_editor_absoluteX="197dp">
+
+            <Button
+                android:id="@+id/button_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/onboard_gender_button_disabled"
+                android:elevation="10dp"
+                android:fontFamily="@font/merriweather"
+                android:shadowColor="#000"
+                android:text="Female"
+                android:textAllCaps="false"
+                android:textSize="26dp"
+
+                />
+        </com.sdsmdg.harjot.materialshadows.MaterialShadowViewWrapper>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/onboard_button_grey"
+        android:shadowColor="#FFFFFF"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="0"
+        android:text="CONTINUE"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

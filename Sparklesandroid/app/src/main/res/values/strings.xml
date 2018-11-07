@@ -23,4 +23,6 @@
         completions."
     </string>
     <string name="onboarding_name_text">Lets start with \nyour beautiful \nname.</string>
+    <string name="onboarding_gender_text">What\s your \ngender ?</string>
+
 </resources>
