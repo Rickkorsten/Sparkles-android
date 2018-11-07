@@ -22,4 +22,5 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="onboarding_name_text">Lets start with \nyour beautiful \nname.</string>
 </resources>
