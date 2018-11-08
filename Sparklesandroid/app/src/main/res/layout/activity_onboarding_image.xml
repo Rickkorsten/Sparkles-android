@@ -6,18 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".onboarding.OnboardingImage">
 
-    <ImageView
-        android:id="@+id/imageView"
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:fontFamily="@font/merriweather"
+        android:text="@string/onboarding_preference_text"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/image_wrapper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.sdsmdg.harjot.materialshadows.MaterialShadowViewWrapper
+        android:id="@+id/image_wrapper"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/onboard_image_upload"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:gravity="bottom"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:shadowAlpha="0.6"
+        app:shadowOffsetY="-10">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/onboard_image_upload"
+            android:elevation="10dp"
+            android:shadowColor="#000"
+            android:stateListAnimator="@null" />
+
+    </com.sdsmdg.harjot.materialshadows.MaterialShadowViewWrapper>
 
     <Button
         android:id="@+id/button"

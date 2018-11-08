@@ -22,11 +22,13 @@ class OnboardingName : AppCompatActivity() {
         button.setOnClickListener{
             val inputtedText = name.text
             if(inputtedText.isNotEmpty()) {
-                inputtedText.toString()
-                startActivity(Intent(this, OnboardingGender::class.java)
-                .apply {
-                                putExtra("name", inputtedText)
-            })
+
+
+                val i = Intent(this, OnboardingGender::class.java)
+                i.putExtra("NAME", "$inputtedText")
+                startActivity(i)
+
+
             }else{
                 Toast.makeText(applicationContext,"please give us your name!",Toast.LENGTH_SHORT).show()
             }

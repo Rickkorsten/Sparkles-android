@@ -24,6 +24,8 @@
     </string>
     <string name="onboarding_name_text">Lets start with \nyour beautiful \nfirst name.</string>
     <string name="onboarding_gender_text">What\s your \ngender ?</string>
+    <string name="onboarding_preference_text">What\s your \npreference ?</string>
+    <string name="onboarding_image_text">Let\s choose \nyour best picture.</string>
     <string name="intro_text">A new way to \nblind date.</string>
 
 </resources>
