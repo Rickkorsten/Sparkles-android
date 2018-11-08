@@ -22,7 +22,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="onboarding_name_text">Lets start with \nyour beautiful \nname.</string>
+    <string name="onboarding_name_text">Lets start with \nyour beautiful \nfirst name.</string>
     <string name="onboarding_gender_text">What\s your \ngender ?</string>
 
 </resources>
