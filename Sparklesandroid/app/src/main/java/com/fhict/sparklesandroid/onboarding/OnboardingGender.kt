@@ -37,7 +37,7 @@ class OnboardingGender : AppCompatActivity() {
 
         btn.setOnClickListener{
             if(gender !== "nothing") {
-                startActivity(Intent(this, OnboardingGender::class.java)
+                startActivity(Intent(this, OnboardingImage::class.java)
                         .apply {
                             putExtra("name", name)
                             putExtra("gender", gender)
