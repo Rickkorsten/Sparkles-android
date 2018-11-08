@@ -55,7 +55,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapSentences"
-                android:background="@null"/>
+                android:background="@null"
+                >
+                <requestFocus />
+            </android.support.design.widget.TextInputEditText>
         </android.support.design.widget.TextInputLayout>
     </com.sdsmdg.harjot.materialshadows.MaterialShadowViewWrapper>
 
