@@ -43,6 +43,9 @@
             android:name=".onboarding.OnboardingGender"
             android:theme="@style/AppTheme.NoTitleBar" />
         <activity
+            android:name=".onboarding.OnboardingBirthday"
+            android:theme="@style/AppTheme.NoTitleBar" />
+        <activity
             android:name=".onboarding.OnboardingPreference"
             android:theme="@style/AppTheme.NoTitleBar" />
         <activity

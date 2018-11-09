@@ -3,6 +3,7 @@ package com.fhict.sparklesandroid.onboarding
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.widget.Button
 import android.widget.Toast
 import com.fhict.sparklesandroid.R
@@ -16,6 +17,10 @@ class OnboardingGender : AppCompatActivity() {
         // get values
         val extras = intent.extras ?: return
         val name = extras.getString("NAME")
+        val date = extras.getSerializable("DATE")
+
+        Toast.makeText(applicationContext, "$name  $date",Toast.LENGTH_SHORT).show()
+
 
         val maleBtn = findViewById<Button>(R.id.button_male)
         val femaleBtn = findViewById<Button>(R.id.button_female)

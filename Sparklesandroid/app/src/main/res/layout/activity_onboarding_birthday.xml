@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".onboarding.OnboardingName">
+    tools:context=".onboarding.OnboardingBirthday">
 
     <TextView
         android:id="@+id/textView"
@@ -14,7 +14,7 @@
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/merriweather"
-        android:text="@string/onboarding_name_text"
+        android:text="@string/onboarding_birthday_text"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="30sp"
 
@@ -34,8 +34,9 @@
         app:shadowOffsetY="-10"
         app:shadowAlpha="0.6">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayout"
+        <EditText
+            android:id="@+id/calendarEditText"
+            android:inputType="date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -51,16 +52,7 @@
             android:shadowColor="#000000"
             >
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/nameInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textCapSentences"
-                android:background="@null"
-                >
-                <requestFocus />
-            </android.support.design.widget.TextInputEditText>
-        </android.support.design.widget.TextInputLayout>
+        </EditText>
     </com.sdsmdg.harjot.materialshadows.MaterialShadowViewWrapper>
 
     <Button

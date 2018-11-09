@@ -24,7 +24,7 @@ class OnboardingName : AppCompatActivity() {
             if(inputtedText.isNotEmpty()) {
 
 
-                val i = Intent(this, OnboardingGender::class.java)
+                val i = Intent(this, OnboardingBirthday::class.java)
                 i.putExtra("NAME", "$inputtedText")
                 startActivity(i)
 
