@@ -42,16 +42,22 @@ class OnboardingBirthday : AppCompatActivity() {
                 calendarInput.setText("$mDay/$mMonth/$mYear")
             }, year, month, day)
             // show dialog
+            button.setBackgroundResource(R.drawable.onboard_button_green)
             dpd.show()
         }
 
         button.setOnClickListener{
+            val dataInput = calendarInput.text.toString()
+            if (dataInput.isEmpty()){
+                Toast.makeText(applicationContext, "Please give us your date of birth",Toast.LENGTH_SHORT).show()
 
-            val i = Intent(this, OnboardingGender::class.java)
-            i.putExtra("NAME", "$name")
-            i.putExtra("DATE", date)
+            } else {
+                val i = Intent(this, OnboardingGender::class.java)
+                i.putExtra("NAME", "$name")
+                i.putExtra("DATE", date)
 
-            startActivity(i)
+                startActivity(i)
+            }
 
         }
 

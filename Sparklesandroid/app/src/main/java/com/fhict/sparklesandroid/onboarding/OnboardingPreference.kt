@@ -16,7 +16,7 @@ class OnboardingPreference : AppCompatActivity() {
         val extras = intent.extras ?: return
         val name = extras.getString("NAME")
         val gender = extras.getString("GENDER")
-
+        val date = extras.getSerializable("DATE")
 
         // get values
         var maleBtn : Button = findViewById(R.id.button_male)
@@ -45,6 +45,7 @@ class OnboardingPreference : AppCompatActivity() {
                             putExtra("NAME", "$name")
                             putExtra("GENDER", "$gender")
                             putExtra("PREFERENCE", "$preference")
+                            putExtra("DATE", date)
                         })
             }else{
                 Toast.makeText(applicationContext, preference,Toast.LENGTH_SHORT).show()

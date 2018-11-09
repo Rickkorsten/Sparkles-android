@@ -22,8 +22,10 @@ class OnboardingImage : AppCompatActivity() {
         val name = extras.getString("NAME")
         val gender = extras.getString("GENDER")
         val preference = extras.getString("PREFERENCE")
+        val date = extras.getSerializable("DATE")
 
-        Toast.makeText(applicationContext, "$name $gender $preference",Toast.LENGTH_LONG).show()
+
+        Toast.makeText(applicationContext, "$name $gender $preference $date",Toast.LENGTH_LONG).show()
 
         val imageButton: ImageView = findViewById(R.id.imageView)
 

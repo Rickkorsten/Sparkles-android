@@ -19,8 +19,6 @@ class OnboardingGender : AppCompatActivity() {
         val name = extras.getString("NAME")
         val date = extras.getSerializable("DATE")
 
-        Toast.makeText(applicationContext, "$name  $date",Toast.LENGTH_SHORT).show()
-
 
         val maleBtn = findViewById<Button>(R.id.button_male)
         val femaleBtn = findViewById<Button>(R.id.button_female)
@@ -47,6 +45,7 @@ class OnboardingGender : AppCompatActivity() {
                         .apply {
                             putExtra("NAME", "$name")
                             putExtra("GENDER", "$gender")
+                            putExtra("DATE", date)
                         })
             }else{
                 Toast.makeText(applicationContext, "$name  $gender",Toast.LENGTH_SHORT).show()
