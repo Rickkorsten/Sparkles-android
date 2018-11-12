@@ -45,7 +45,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:multidex:1.0.0"
+<<<<<<< HEAD
     implementation 'junit:junit:4.12'
+=======
+    implementation "com.airbnb.android:lottie:2.7.0"
+>>>>>>> 669b2490ad701e7460ea97fd8fbc3b5499ad4415
 
 }
 repositories {
