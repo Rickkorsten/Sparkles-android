@@ -40,13 +40,13 @@ class OnboardingPreference : AppCompatActivity() {
 
         btn.setOnClickListener{
             if(preference !== "nothing") {
-                startActivity(Intent(this, OnboardingImage::class.java)
-                        .apply {
-                            putExtra("NAME", "$name")
-                            putExtra("GENDER", "$gender")
-                            putExtra("PREFERENCE", "$preference")
-                            putExtra("DATE", date)
-                        })
+                val i = Intent(this, OnboardingImage::class.java)
+                i.putExtra("NAME", "$name")
+                i.putExtra("GENDER", "$gender")
+                i.putExtra("PREFERENCE", "$preference")
+                i.putExtra("DATE", date)
+                startActivity(i)
+
             }else{
                 Toast.makeText(applicationContext, preference,Toast.LENGTH_SHORT).show()
             }

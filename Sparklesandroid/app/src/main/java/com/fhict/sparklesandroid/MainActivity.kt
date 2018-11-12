@@ -56,9 +56,6 @@ class MainActivity : AppCompatActivity() {
         mViewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(mViewPager))
 
-        // get device ID
-        val androidId = Settings.Secure.getString(contentResolver,
-                Settings.Secure.ANDROID_ID)
     }
 
 

@@ -41,12 +41,11 @@ class OnboardingGender : AppCompatActivity() {
 
         btn.setOnClickListener{
             if(gender !== "nothing") {
-                startActivity(Intent(this, OnboardingPreference::class.java)
-                        .apply {
-                            putExtra("NAME", "$name")
-                            putExtra("GENDER", "$gender")
-                            putExtra("DATE", date)
-                        })
+                val i = Intent(this, OnboardingPreference::class.java)
+                i.putExtra("NAME", "$name")
+                i.putExtra("GENDER", "$gender")
+                i.putExtra("DATE", date)
+                startActivity(i)
             }else{
                 Toast.makeText(applicationContext, "$name  $gender",Toast.LENGTH_SHORT).show()
             }
