@@ -1,5 +1,6 @@
 package com.fhict.sparklesandroid
 
+import android.content.Intent
 import android.provider.Settings
 import android.support.design.widget.TabLayout
 import android.support.design.widget.FloatingActionButton
@@ -12,6 +13,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -19,6 +21,15 @@ import android.view.View
 import android.view.ViewGroup
 
 import android.widget.TextView
+import android.widget.Toast
+import com.fhict.sparklesandroid.data.model.User
+import com.fhict.sparklesandroid.data.remote.APIService
+import com.fhict.sparklesandroid.data.remote.ApiUtils
+import com.fhict.sparklesandroid.onboarding.OnboardingWelcome
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,6 +47,9 @@ class MainActivity : AppCompatActivity() {
      * The [ViewPager] that will host the section contents.
      */
     private var mViewPager: ViewPager? = null
+    private var mAPIService: APIService? = null
+    private var mResponseTv: TextView? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,8 +70,51 @@ class MainActivity : AppCompatActivity() {
         mViewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(mViewPager))
 
+        // create api service
+        mAPIService = ApiUtils.getAPIService()
+
+        // check if app opens for first time
+        val preferencesHelper : PreferencesHelper = PreferencesHelper(this)
+        val didOnboard : Boolean = preferencesHelper.didOnboarding
+
+        if (!didOnboard){
+            val i = Intent(this, OnboardingWelcome::class.java)
+            startActivity(i)
+        } else {
+            val firstName = preferencesHelper.firstName
+            val deviceId = preferencesHelper.deviceId
+            Toast.makeText(applicationContext, "$firstName + $deviceId", Toast.LENGTH_SHORT).show()
+            if (!firstName.isEmpty() || !deviceId.isEmpty()){
+                // do something
+                login(firstName,deviceId)
+            }
+
+        }
     }
 
+    fun login(firstName: String, device_id: String) {
+        Toast.makeText(applicationContext, "login", Toast.LENGTH_SHORT).show()
+        mAPIService?.loginUser(firstName, device_id )!!.enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                // showResponse(response.body().toString())
+                if (response.isSuccessful()) {
+                    Log.i( "pipo de clown","post submitted to API." + response.body().toString())
+                    Toast.makeText(applicationContext, response.body().toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                Log.e("pipo de clown",t.message)
+            }
+        })
+    }
+
+//    fun showResponse(response: String) {
+//        if (mResponseTv?.getVisibility() === View.GONE) {
+//            mResponseTv?.setVisibility(View.VISIBLE)
+//        }
+//        mResponseTv?.setText(response)
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

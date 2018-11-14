@@ -19,4 +19,10 @@ public interface APIService {
                         @Field("device_id") String deviceId,
                         @Field("preference") String preference,
                         @Field("date_of_birth") Date date);
+
+
+    @POST("user/login")
+    @FormUrlEncoded
+    Call<User> loginUser(@Field("firstName") String firstName,
+                         @Field("device_id") String deviceId);
 }

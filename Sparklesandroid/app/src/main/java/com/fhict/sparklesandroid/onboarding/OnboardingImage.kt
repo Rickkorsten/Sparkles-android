@@ -14,6 +14,8 @@ import android.util.Log
 import android.view.View
 import com.fhict.sparklesandroid.data.remote.APIService
 import android.widget.TextView
+import com.fhict.sparklesandroid.MainActivity
+import com.fhict.sparklesandroid.PreferencesHelper
 import com.fhict.sparklesandroid.data.model.User
 import com.fhict.sparklesandroid.data.remote.ApiUtils
 import retrofit2.Call
@@ -88,6 +90,15 @@ class OnboardingImage : AppCompatActivity() {
                 if (response.isSuccessful()) {
                     showResponse(response.body().toString())
                     Log.i( "pipo de clown","post submitted to API." + response.body().toString())
+                    Toast.makeText(applicationContext, "created account", Toast.LENGTH_SHORT).show()
+
+                    val preferencesHelper = PreferencesHelper(applicationContext)
+                    preferencesHelper.didOnboarding = true;
+                    preferencesHelper.deviceId = device_id;
+                    preferencesHelper.firstName = firstName;
+
+                    val i = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(i)
                 }
             }
 
