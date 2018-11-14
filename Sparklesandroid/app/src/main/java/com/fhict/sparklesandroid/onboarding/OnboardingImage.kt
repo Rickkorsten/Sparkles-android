@@ -46,6 +46,7 @@ class OnboardingImage : AppCompatActivity() {
 
         // get android id
         val device_id = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        // val device_id : String = "nieuwId123"
 
         // create api service
          mAPIService = ApiUtils.getAPIService();
@@ -60,7 +61,9 @@ class OnboardingImage : AppCompatActivity() {
         }
         // click bottom button
         submitButton.setOnClickListener {
-            sendPost(firstName, gender, preference, date, device_id, userImage!!)
+            Toast.makeText(applicationContext, "$firstName, $gender, $preference, $device_id, $date, $userImage!!",Toast.LENGTH_LONG).show()
+
+            sendPost(firstName, gender, preference, device_id, date)
         }
     }
 
@@ -78,8 +81,8 @@ class OnboardingImage : AppCompatActivity() {
         }
     }
 
-    fun sendPost(firstName: String, gender: String, preference: String, date: Date, device_id: String, image: String) {
-        mAPIService?.saveUser(firstName, gender, date, device_id, image, preference)!!.enqueue(object : Callback<User> {
+    fun sendPost(firstName: String, gender: String, preference: String, device_id: String, date: Date) {
+        mAPIService?.saveUser(firstName, gender, device_id, preference, date)!!.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
 
                 if (response.isSuccessful()) {
@@ -89,7 +92,7 @@ class OnboardingImage : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.e("pipo de clown","Unable to submit post to API.")
+                Log.e("pipo de clown",t.message)
             }
         })
     }

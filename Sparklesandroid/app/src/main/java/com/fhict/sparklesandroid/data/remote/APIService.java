@@ -16,8 +16,7 @@ public interface APIService {
     @FormUrlEncoded
     Call<User> saveUser(@Field("firstName") String firstName,
                         @Field("gender") String gender,
-                        @Field("date_of_birth") Date date,
                         @Field("device_id") String deviceId,
-                        @Field("userImage") String userImage,
-                        @Field("preference") String preference);
+                        @Field("preference") String preference,
+                        @Field("date_of_birth") Date date);
 }
