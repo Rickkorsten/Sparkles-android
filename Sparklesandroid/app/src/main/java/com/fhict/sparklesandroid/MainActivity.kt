@@ -22,10 +22,19 @@ import android.view.ViewGroup
 
 import android.widget.TextView
 import android.widget.Toast
+import com.auth0.android.jwt.Claim
+import com.auth0.android.jwt.JWT
+import com.fhict.sparklesandroid.data.model.LoginResponse
 import com.fhict.sparklesandroid.data.model.User
 import com.fhict.sparklesandroid.data.remote.APIService
 import com.fhict.sparklesandroid.data.remote.ApiUtils
 import com.fhict.sparklesandroid.onboarding.OnboardingWelcome
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,13 +59,10 @@ class MainActivity : AppCompatActivity() {
     private var mAPIService: APIService? = null
     private var mResponseTv: TextView? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar)
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
@@ -93,13 +99,43 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun login(firstName: String, device_id: String) {
-        Toast.makeText(applicationContext, "login", Toast.LENGTH_SHORT).show()
-        mAPIService?.loginUser(firstName, device_id )!!.enqueue(object : Callback<User> {
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                // showResponse(response.body().toString())
+        mAPIService?.loginUser(firstName, device_id )!!.enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful()) {
-                    Log.i( "pipo de clown","post submitted to API." + response.body().toString())
-                    Toast.makeText(applicationContext, response.body().toString(), Toast.LENGTH_SHORT).show()
+                    Log.i( "pipo de clown","post submitted to API." + response.body()!!.token)
+
+                    var decoded = JWTUtils.decoded(response.body()!!.token);
+                    var jsonOb = JSONObject(decoded);
+                    var userId=jsonOb.get("userId").toString();
+
+                    //Toast.makeText(applicationContext, userId.toString(), Toast.LENGTH_SHORT).show()
+
+                    getUser(userId)
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                Log.e("pipo de clown",t.message)
+            }
+        })
+    }
+
+    private fun getUser(userId: String) {
+        mAPIService?.getUser(userId)!!.enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if (response.isSuccessful()) {
+
+                    val preferencesHelper = PreferencesHelper(applicationContext)
+
+                    val gson = Gson()
+                    val userObjectString = gson.toJson(response.body()!!)
+                    preferencesHelper.user = userObjectString;
+
+                        // get shared preference and create object
+                     // val user = gson.fromJson(userObjectString, User::class.java)
+
+                    Toast.makeText(applicationContext, response.body()!!.preference.toString(), Toast.LENGTH_SHORT).show()
+
                 }
             }
 
@@ -109,12 +145,12 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-//    fun showResponse(response: String) {
-//        if (mResponseTv?.getVisibility() === View.GONE) {
-//            mResponseTv?.setVisibility(View.VISIBLE)
-//        }
-//        mResponseTv?.setText(response)
-//    }
+    fun showResponse(response: String) {
+        if (mResponseTv?.getVisibility() === View.GONE) {
+            mResponseTv?.setVisibility(View.VISIBLE)
+        }
+        mResponseTv?.setText(response)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
