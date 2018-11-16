@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import com.fhict.sparklesandroid.R
 import android.content.Intent
+import android.os.Build
 import android.widget.Button
 import android.widget.Toast
 import com.esafirm.imagepicker.features.ImagePicker
@@ -34,6 +35,12 @@ class OnboardingImage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding_image)
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.sparkle_button_grey))
+            window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.sparkle_background))
+        }
 
         // get all values
         val extras = intent.extras ?: return
@@ -79,7 +86,9 @@ class OnboardingImage : AppCompatActivity() {
             Toast.makeText(applicationContext, userImage, Toast.LENGTH_SHORT).show()
             GlideApp.with(this).load(userImage).into(imageButton);
             button.setBackgroundResource(R.drawable.onboard_button_green)
-
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                getWindow().setNavigationBarColor(getResources().getColor(R.color.sparkle_green))
+            }
         }
     }
 

@@ -7,5 +7,8 @@
 
     <color name="sparkle_green">#3BFFD1</color>
     <color name="sparkle_grey">#66d7d7d7</color>
+    <color name="sparkle_button_grey">#d6d6d6</color>
+    <color name="sparkle_background">#F9F9F9</color>
+
 
 </resources>
