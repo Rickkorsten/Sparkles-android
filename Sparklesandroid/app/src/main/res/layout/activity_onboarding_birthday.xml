@@ -34,7 +34,7 @@
         app:shadowOffsetY="-10"
         app:shadowAlpha="0.6">
 
-        <EditText
+        <TextView
             android:id="@+id/calendarEditText"
             android:inputType="date"
             android:layout_width="match_parent"
@@ -52,7 +52,7 @@
             android:shadowColor="#000000"
             >
 
-        </EditText>
+        </TextView>
     </com.sdsmdg.harjot.materialshadows.MaterialShadowViewWrapper>
 
     <Button
