@@ -1,6 +1,8 @@
 package com.fhict.sparklesandroid
 
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v4.app.Fragment
@@ -9,15 +11,19 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.fhict.sparklesandroid.data.model.LoginResponse
 import com.fhict.sparklesandroid.data.model.User
 import com.fhict.sparklesandroid.data.remote.APIService
 import com.fhict.sparklesandroid.data.remote.ApiUtils
 import com.fhict.sparklesandroid.onboarding.OnboardingWelcome
-import com.fhict.sparklesandroid.onboarding.Tab1Fragment
-import com.fhict.sparklesandroid.onboarding.Tab2Fragment
-import com.fhict.sparklesandroid.onboarding.Tab3Fragment
+import com.fhict.sparklesandroid.tabs.Tab1Fragment
+import com.fhict.sparklesandroid.tabs.Tab2Fragment
+import com.fhict.sparklesandroid.tabs.Tab3Fragment
 import com.google.gson.Gson
 import org.json.JSONObject
 import retrofit2.Call
@@ -42,10 +48,17 @@ class MainActivity : AppCompatActivity() {
     private var mAPIService: APIService? = null
     private var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
+    val gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.white))
+            window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.white))
+        }
 
         viewPager = findViewById(R.id.container) as ViewPager
         setupViewPager(viewPager!!)
@@ -73,6 +86,31 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+        val tabLayout = findViewById<TabLayout>(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabTextColors(R.color.black, R.color.sparkle_green)
+        setupCustomTabs();
+    }
+
+    fun setupCustomTabs() {
+
+        val headerView = (getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
+                .inflate(R.layout.custom_tab, null, false)
+
+        val preferencesHelper = PreferencesHelper(applicationContext)
+        val user = gson.fromJson(preferencesHelper.user, User::class.java)
+
+        val linearLayoutOne = headerView.findViewById<LinearLayout>(R.id.ll)
+        val linearLayout2 = headerView.findViewById<LinearLayout>(R.id.ll2)
+        val linearLayout3 = headerView.findViewById<LinearLayout>(R.id.ll3)
+
+        val textView = headerView.findViewById<TextView>(R.id.name)
+        textView.setText("${user.firstName.toString()}")
+
+        tabLayout!!.getTabAt(0)!!.setCustomView(linearLayoutOne)
+        tabLayout!!.getTabAt(1)!!.setCustomView(linearLayout2)
+        tabLayout!!.getTabAt(2)!!.setCustomView(linearLayout3)
     }
 
     fun login(firstName: String, device_id: String) {
@@ -123,10 +161,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
+
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(Tab1Fragment(), "ONE")
-        adapter.addFragment(Tab2Fragment(), "TWO")
-        adapter.addFragment(Tab3Fragment(), "THREE")
+        adapter.addFragment(Tab1Fragment(),"")
+        adapter.addFragment(Tab2Fragment(), "")
+        adapter.addFragment(Tab3Fragment(),"")
         viewPager.adapter = adapter
     }
 
