@@ -43,20 +43,28 @@ class OnboardingBirthday : AppCompatActivity() {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
 
-        // calendarInput.setOnClickListener{
-            val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{view,mYear, mMonth, mDay->
-                // set to textView
-                date = SimpleDateFormat("dd/MM/yyyy").parse("$mDay/$mMonth/$mYear")
-                Toast.makeText(applicationContext, "$date",Toast.LENGTH_SHORT).show()
-                calendarInput.setText("$mDay/$mMonth/$mYear")
-            }, year, month, day)
-            // show dialog
+        val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{view,mYear, mMonth, mDay->
+            // set to textView
+            date = SimpleDateFormat("dd/MM/yyyy").parse("$mDay/$mMonth/$mYear")
+            calendarInput.setText("$mDay/$mMonth/$mYear")
+        }, year, month, day)
+        // show dialog
+        dpd.show()
+
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.sparkle_green))
+        }
+
+
+        if( calendarInput.getText() !== null) {
             button.setBackgroundResource(R.drawable.onboard_button_green)
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                getWindow().setNavigationBarColor(getResources().getColor(R.color.sparkle_green))
-            }
+        }
+
+
+        calendarInput.setOnClickListener{
             dpd.show()
-       // }
+        }
 
         button.setOnClickListener{
             val dataInput = calendarInput.text.toString()
