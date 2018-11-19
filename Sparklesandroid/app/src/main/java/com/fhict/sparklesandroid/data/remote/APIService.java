@@ -1,4 +1,5 @@
 package com.fhict.sparklesandroid.data.remote;
+import com.fhict.sparklesandroid.data.model.LoginResponse;
 import com.fhict.sparklesandroid.data.model.User;
 
 import java.io.Serializable;
@@ -8,7 +9,9 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface APIService {
 
@@ -23,6 +26,10 @@ public interface APIService {
 
     @POST("user/login")
     @FormUrlEncoded
-    Call<User> loginUser(@Field("firstName") String firstName,
-                         @Field("device_id") String deviceId);
+    Call<LoginResponse> loginUser(@Field("firstName") String firstName,
+                                  @Field("device_id") String deviceId);
+
+
+    @GET("user/{id}")
+    Call<User> getUser(@Path("id") String userId);
 }
