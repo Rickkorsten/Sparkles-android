@@ -34,4 +34,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/sparkle_green</item>
+    </style>
 </resources>

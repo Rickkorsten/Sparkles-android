@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -21,10 +22,12 @@ class OnboardingName : AppCompatActivity() {
         var name = findViewById<EditText>(R.id.nameInput)
         var button = findViewById<Button>(R.id.button)
 
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.sparkle_button_grey))
-            window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            getWindow().setStatusBarColor(getResources().getColor(R.color.sparkle_background))
+            window.navigationBarColor = resources.getColor(R.color.sparkle_button_grey)
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            window.statusBarColor = resources.getColor(R.color.sparkle_background)
         }
 
         button.setOnClickListener{
@@ -43,24 +46,17 @@ class OnboardingName : AppCompatActivity() {
         }
 
         name.addTextChangedListener(object: TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-                // Do something after text changed
-               // button.setBackgroundResource(R.drawable.onboard_button_green)
-            }
+            override fun afterTextChanged(p0: Editable?) {}
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                // Do something before text changed on EditText
-            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                // Do something on text changed in EditText
-                // Display the EditText change text on TextView real time
                 if(p0?.length!! < 1){
                     Toast.makeText(applicationContext,"nothing",Toast.LENGTH_SHORT).show()
                     button.setBackgroundResource(R.drawable.onboard_button_grey)
                 }else{
                     if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        getWindow().setNavigationBarColor(getResources().getColor(R.color.sparkle_green))
+                        window.navigationBarColor = resources.getColor(R.color.sparkle_green)
                     }
                     button.setBackgroundResource(R.drawable.onboard_button_green)
                 }
