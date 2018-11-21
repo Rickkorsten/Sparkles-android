@@ -9,21 +9,23 @@
     app:elevation="0dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:id="@+id/ll"
         android:orientation="horizontal"
         android:layout_weight="1"
+        android:paddingTop="7dp"
+        android:paddingBottom="3dp"
         android:gravity="center">
 
         <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/ic_account_box_black_40dp"/>
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/user"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_weight="1"
         android:id="@+id/ll2"
@@ -35,22 +37,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/merriweather"
-            android:text="NAAM"
+            android:text="Tom Gielen"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_weight="1"
         android:id="@+id/ll3"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
         android:orientation="vertical"
         android:gravity="center">
         <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@drawable/ic_forum_black_40dp"/>
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/chat"/>
     </LinearLayout>
 </LinearLayout>

@@ -33,18 +33,6 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    /**
-     * The [android.support.v4.view.PagerAdapter] that will provide
-     * fragments for each of the sections. We use a
-     * [FragmentPagerAdapter] derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * [android.support.v4.app.FragmentStatePagerAdapter].
-     */
-
-    /**
-     * The [ViewPager] that will host the section contents.
-     */
     private var mAPIService: APIService? = null
     private var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
@@ -60,19 +48,22 @@ class MainActivity : AppCompatActivity() {
             window.statusBarColor = resources.getColor(R.color.sparkle_background)
         }
 
-        viewPager = findViewById<ViewPager>(R.id.container)
+        viewPager = findViewById(R.id.container)
         setupViewPager(viewPager!!)
 
-        tabLayout = findViewById<TabLayout>(R.id.tabs)
+        tabLayout = findViewById(R.id.tabs)
+
         tabLayout!!.setupWithViewPager(viewPager)
 
+        val tabLayoutHome = findViewById<View>(R.id.tabs) as TabLayout
+        val tab = tabLayoutHome.getTabAt(1)
+        tab!!.select()
         // create api service
         mAPIService = ApiUtils.getAPIService()
 
         // check if app opens for first time
         val preferencesHelper: PreferencesHelper = PreferencesHelper(this)
         val didOnboard: Boolean = preferencesHelper.didOnboarding
-
         if (!didOnboard) {
             val i = Intent(this, OnboardingWelcome::class.java)
             startActivity(i)
@@ -105,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         val linearLayout3 = headerView.findViewById<LinearLayout>(R.id.ll3)
 
         val textView = headerView.findViewById<TextView>(R.id.name)
-        textView.text = "${user.firstName}"
+        textView.text = user.firstName
 
         tabLayout!!.getTabAt(0)!!.customView = linearLayoutOne
         tabLayout!!.getTabAt(1)!!.customView = linearLayout2
@@ -114,15 +105,15 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    fun login(firstName: String, device_id: String) {
+    private fun login(firstName: String, device_id: String) {
         mAPIService?.loginUser(firstName, device_id)!!.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
                     Log.i("pipo de clown", "post submitted to API." + response.body()!!.token)
 
-                    var decoded = JWTUtils.decoded(response.body()!!.token)
-                    var jsonOb = JSONObject(decoded)
-                    var userId = jsonOb.get("userId").toString()
+                    val decoded = JWTUtils.decoded(response.body()!!.token)
+                    val jsonOb = JSONObject(decoded)
+                    val userId = jsonOb.get("userId").toString()
 
                     Toast.makeText(applicationContext, "login succes", Toast.LENGTH_SHORT).show()
 
@@ -156,7 +147,7 @@ class MainActivity : AppCompatActivity() {
                     // get shared preference and create object
                     // val user = gson.fromJson(userObjectString, User::class.java)
                     setupCustomTabs()
-                    Toast.makeText(applicationContext, response.body()!!.preference.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, response.body().toString(), Toast.LENGTH_LONG).show()
 
                 }
             }

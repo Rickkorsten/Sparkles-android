@@ -13,33 +13,65 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="80dp">
+        android:paddingTop="120dp">
 
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginLeft="40dp"
-            android:src="@drawable/rick"
-            />
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/merriweather"
-            android:paddingLeft="40dp"
-            android:layout_marginTop="10dp"
-            android:text="Rick (21)"
-            android:textColor="#000"
-            android:textSize="25sp" />
+            android:orientation="horizontal">
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="40dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/bram"
+                app:civ_border_color="@color/sparkle_border"
+                app:civ_border_width="1dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:layout_marginTop="-2dp"
+                >
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/merriweather"
+
+                    android:text="Rick (21)"
+                    android:textColor="#000"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:text="I am a nice guy who loves to play soccer and hang out with my friends"
+                    android:textColor="#000"
+                    android:paddingEnd="40dp"
+                    android:layout_marginTop="4dp"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/sparkle_green"
+        android:background="@drawable/user_app_updates_background"
         android:orientation="vertical"
         android:padding="30dp"
         android:layout_marginBottom="120dp"
@@ -53,7 +85,7 @@
             android:fontFamily="@font/merriweather"
             android:text="THANK YOU FOR TESTING THE BETA OF SPARK"
             android:textColor="#fff"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
@@ -62,7 +94,7 @@
             android:fontFamily="sans-serif"
             android:text="We could not make this app without you, so we would like to share some new features we are going to add to SPARK"
             android:textColor="#fff"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -71,7 +103,7 @@
             android:fontFamily="sans-serif"
             android:text="- In chat games"
             android:textColor="#fff"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
@@ -80,7 +112,7 @@
             android:fontFamily="sans-serif"
             android:text="- Bitmoji intergration"
             android:textColor="#fff"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
@@ -89,7 +121,7 @@
             android:fontFamily="sans-serif"
             android:text="- GIF support"
             android:textColor="#fff"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
     </LinearLayout>
