@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         val tabLayout = findViewById<TabLayout>(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabTextColors(R.color.black, R.color.sparkle_green)
-        setupCustomTabs();
+
     }
 
     fun setupCustomTabs() {
@@ -123,9 +123,13 @@ class MainActivity : AppCompatActivity() {
                     var jsonOb = JSONObject(decoded);
                     var userId=jsonOb.get("userId").toString();
 
-                    //Toast.makeText(applicationContext, userId.toString(), Toast.LENGTH_SHORT).show()
+                    setupCustomTabs();
+
+                    Toast.makeText(applicationContext, "login succes", Toast.LENGTH_SHORT).show()
 
                     getUser(userId)
+                }else {
+                    Toast.makeText(applicationContext, "login failed", Toast.LENGTH_SHORT).show()
                 }
             }
 

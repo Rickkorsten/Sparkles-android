@@ -2,6 +2,7 @@ package com.fhict.sparklesandroid.tabs
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.R.id.add
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
@@ -30,7 +31,9 @@ class Tab2Fragment : Fragment() {
 //            startActivity(i)
 //        }
 
-//        getSupportFragmentManager()
+//      supportFragmentManager.inTransaction {
+//    add(R.id.frameLayoutContent, fragment)
+//}
         return view
     }
 
