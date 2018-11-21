@@ -3,6 +3,8 @@ package com.fhict.sparklesandroid.tabs
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +29,15 @@ class Tab2Fragment : Fragment() {
 //            val i = Intent(context, ChatActivity::class.java)
 //            startActivity(i)
 //        }
+
+//        getSupportFragmentManager()
         return view
+    }
+
+    inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
+        val fragmentTransaction = beginTransaction()
+        fragmentTransaction.func()
+        fragmentTransaction.commit()
     }
 
 }
