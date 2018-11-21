@@ -102,9 +102,15 @@ class OnboardingImage : AppCompatActivity() {
                     Toast.makeText(applicationContext, "created account", Toast.LENGTH_SHORT).show()
 
                     val preferencesHelper = PreferencesHelper(applicationContext)
+<<<<<<< HEAD
                     preferencesHelper.didOnboarding = true
                     preferencesHelper.deviceId = device_id
                     preferencesHelper.firstName = firstName
+=======
+                    preferencesHelper.didOnboarding = true;
+                    preferencesHelper.deviceId = device_id;
+                    // preferencesHelper.firstName = firstName;
+>>>>>>> develop
 
                     val i = Intent(applicationContext, MainActivity::class.java)
                     startActivity(i)

@@ -100,7 +100,6 @@ class MainActivity : AppCompatActivity() {
 
         val preferencesHelper = PreferencesHelper(applicationContext)
         val user = gson.fromJson(preferencesHelper.user, User::class.java)
-
         val linearLayoutOne = headerView.findViewById<LinearLayout>(R.id.ll)
         val linearLayout2 = headerView.findViewById<LinearLayout>(R.id.ll2)
         val linearLayout3 = headerView.findViewById<LinearLayout>(R.id.ll3)
@@ -123,13 +122,15 @@ class MainActivity : AppCompatActivity() {
                     var jsonOb = JSONObject(decoded);
                     var userId=jsonOb.get("userId").toString();
 
-                    setupCustomTabs();
-
                     Toast.makeText(applicationContext, "login succes", Toast.LENGTH_SHORT).show()
 
                     getUser(userId)
                 }else {
                     Toast.makeText(applicationContext, "login failed", Toast.LENGTH_SHORT).show()
+                    val preferencesHelper = PreferencesHelper(applicationContext)
+                    preferencesHelper.didOnboarding = false
+                    val i = Intent(this@MainActivity, OnboardingWelcome::class.java)
+                    startActivity(i)
                 }
             }
 
@@ -152,7 +153,7 @@ class MainActivity : AppCompatActivity() {
 
                         // get shared preference and create object
                      // val user = gson.fromJson(userObjectString, User::class.java)
-
+                    setupCustomTabs();
                     Toast.makeText(applicationContext, response.body()!!.preference.toString(), Toast.LENGTH_SHORT).show()
 
                 }
