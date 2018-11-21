@@ -55,40 +55,40 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.white))
-            window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            getWindow().setStatusBarColor(getResources().getColor(R.color.white))
+            window.navigationBarColor = resources.getColor(R.color.sparkle_background)
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            window.statusBarColor = resources.getColor(R.color.sparkle_background)
         }
 
-        viewPager = findViewById(R.id.container) as ViewPager
+        viewPager = findViewById<ViewPager>(R.id.container)
         setupViewPager(viewPager!!)
 
-        tabLayout = findViewById(R.id.tabs) as TabLayout
+        tabLayout = findViewById<TabLayout>(R.id.tabs)
         tabLayout!!.setupWithViewPager(viewPager)
 
         // create api service
         mAPIService = ApiUtils.getAPIService()
 
         // check if app opens for first time
-        val preferencesHelper : PreferencesHelper = PreferencesHelper(this)
-        val didOnboard : Boolean = preferencesHelper.didOnboarding
+        val preferencesHelper: PreferencesHelper = PreferencesHelper(this)
+        val didOnboard: Boolean = preferencesHelper.didOnboarding
 
-        if (!didOnboard){
+        if (!didOnboard) {
             val i = Intent(this, OnboardingWelcome::class.java)
             startActivity(i)
         } else {
             val firstName = preferencesHelper.firstName
             val deviceId = preferencesHelper.deviceId
             Toast.makeText(applicationContext, "$firstName + $deviceId", Toast.LENGTH_SHORT).show()
-            if (!firstName.isEmpty() || !deviceId.isEmpty()){
+            if (!firstName.isEmpty() || !deviceId.isEmpty()) {
                 // do something
-                login(firstName,deviceId)
+                login(firstName, deviceId)
             }
 
         }
 
-        val tabLayout = findViewById<TabLayout>(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        val tabLayout = findViewById<TabLayout>(R.id.tabs)
+        tabLayout.setupWithViewPager(viewPager)
         tabLayout.setTabTextColors(R.color.black, R.color.sparkle_green)
 
     }
@@ -105,29 +105,29 @@ class MainActivity : AppCompatActivity() {
         val linearLayout3 = headerView.findViewById<LinearLayout>(R.id.ll3)
 
         val textView = headerView.findViewById<TextView>(R.id.name)
-        textView.setText("${user.firstName.toString()}")
+        textView.text = "${user.firstName}"
 
-        tabLayout!!.getTabAt(0)!!.setCustomView(linearLayoutOne)
-        tabLayout!!.getTabAt(1)!!.setCustomView(linearLayout2)
-        tabLayout!!.getTabAt(2)!!.setCustomView(linearLayout3)
+        tabLayout!!.getTabAt(0)!!.customView = linearLayoutOne
+        tabLayout!!.getTabAt(1)!!.customView = linearLayout2
+        tabLayout!!.getTabAt(2)!!.customView = linearLayout3
     }
 
 
 
     fun login(firstName: String, device_id: String) {
-        mAPIService?.loginUser(firstName, device_id )!!.enqueue(object : Callback<LoginResponse> {
+        mAPIService?.loginUser(firstName, device_id)!!.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if (response.isSuccessful()) {
-                    Log.i( "pipo de clown","post submitted to API." + response.body()!!.token)
+                if (response.isSuccessful) {
+                    Log.i("pipo de clown", "post submitted to API." + response.body()!!.token)
 
-                    var decoded = JWTUtils.decoded(response.body()!!.token);
-                    var jsonOb = JSONObject(decoded);
-                    var userId=jsonOb.get("userId").toString();
+                    var decoded = JWTUtils.decoded(response.body()!!.token)
+                    var jsonOb = JSONObject(decoded)
+                    var userId = jsonOb.get("userId").toString()
 
                     Toast.makeText(applicationContext, "login succes", Toast.LENGTH_SHORT).show()
 
                     getUser(userId)
-                }else {
+                } else {
                     Toast.makeText(applicationContext, "login failed", Toast.LENGTH_SHORT).show()
                     val preferencesHelper = PreferencesHelper(applicationContext)
                     preferencesHelper.didOnboarding = false
@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.e("pipo de clown",t.message)
+                Log.e("pipo de clown", t.message)
             }
         })
     }
@@ -145,24 +145,24 @@ class MainActivity : AppCompatActivity() {
     private fun getUser(userId: String) {
         mAPIService?.getUser(userId)!!.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful) {
 
                     val preferencesHelper = PreferencesHelper(applicationContext)
 
                     val gson = Gson()
                     val userObjectString = gson.toJson(response.body()!!)
-                    preferencesHelper.user = userObjectString;
+                    preferencesHelper.user = userObjectString
 
-                        // get shared preference and create object
-                     // val user = gson.fromJson(userObjectString, User::class.java)
-                    setupCustomTabs();
+                    // get shared preference and create object
+                    // val user = gson.fromJson(userObjectString, User::class.java)
+                    setupCustomTabs()
                     Toast.makeText(applicationContext, response.body()!!.preference.toString(), Toast.LENGTH_SHORT).show()
 
                 }
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.e("pipo de clown",t.message)
+                Log.e("pipo de clown", t.message)
             }
         })
     }
@@ -170,9 +170,9 @@ class MainActivity : AppCompatActivity() {
     private fun setupViewPager(viewPager: ViewPager) {
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(Tab1Fragment(),"")
+        adapter.addFragment(Tab1Fragment(), "")
         adapter.addFragment(Tab2Fragment(), "")
-        adapter.addFragment(Tab3Fragment(),"")
+        adapter.addFragment(Tab3Fragment(), "")
         viewPager.adapter = adapter
     }
 
@@ -197,8 +197,6 @@ class MainActivity : AppCompatActivity() {
             return mFragmentTitleList[position]
         }
     }
-
-
 
 
 }

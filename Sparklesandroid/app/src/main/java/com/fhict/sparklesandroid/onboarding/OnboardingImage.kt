@@ -47,10 +47,10 @@ class OnboardingImage : AppCompatActivity() {
         val firstName = extras.getString("NAME")
         val gender = extras.getString("GENDER")
         val preference = extras.getString("PREFERENCE")
-        val date : Date = extras.getSerializable("DATE") as Date
+        val date: Date = extras.getSerializable("DATE") as Date
 
         // get resources
-        val submitButton : Button = findViewById(R.id.button)
+        val submitButton: Button = findViewById(R.id.button)
         val imageButton: ImageView = findViewById(R.id.imageView)
 
         // get android id
@@ -58,9 +58,9 @@ class OnboardingImage : AppCompatActivity() {
         // val device_id : String = "nieuwId123"
 
         // create api service
-         mAPIService = ApiUtils.getAPIService()
+        mAPIService = ApiUtils.getAPIService()
 
-        Toast.makeText(applicationContext, "$firstName $gender $preference $date",Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, "$firstName $gender $preference $date", Toast.LENGTH_LONG).show()
         // click image
         imageButton.setOnClickListener {
             ImagePicker.create(this) // Activity or Fragment
@@ -70,7 +70,7 @@ class OnboardingImage : AppCompatActivity() {
         }
         // click bottom button
         submitButton.setOnClickListener {
-            Toast.makeText(applicationContext, "$firstName, $gender, $preference, $device_id, $date, $userImage!!",Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "$firstName, $gender, $preference, $device_id, $date, $userImage!!", Toast.LENGTH_LONG).show()
 
             sendPost(firstName, gender, preference, device_id, date)
         }
@@ -98,27 +98,21 @@ class OnboardingImage : AppCompatActivity() {
 
                 if (response.isSuccessful) {
                     showResponse(response.body().toString())
-                    Log.i( "pipo de clown","post submitted to API." + response.body().toString())
+                    Log.i("pipo de clown", "post submitted to API." + response.body().toString())
                     Toast.makeText(applicationContext, "created account", Toast.LENGTH_SHORT).show()
 
                     val preferencesHelper = PreferencesHelper(applicationContext)
-<<<<<<< HEAD
                     preferencesHelper.didOnboarding = true
                     preferencesHelper.deviceId = device_id
                     preferencesHelper.firstName = firstName
-=======
-                    preferencesHelper.didOnboarding = true;
-                    preferencesHelper.deviceId = device_id;
                     // preferencesHelper.firstName = firstName;
->>>>>>> develop
-
                     val i = Intent(applicationContext, MainActivity::class.java)
                     startActivity(i)
                 }
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.e("pipo de clown",t.message)
+                Log.e("pipo de clown", t.message)
             }
         })
     }
