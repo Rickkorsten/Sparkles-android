@@ -37,9 +37,9 @@ class OnboardingImage : AppCompatActivity() {
         setContentView(R.layout.activity_onboarding_image)
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.sparkle_button_grey))
-            window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            getWindow().setStatusBarColor(getResources().getColor(R.color.sparkle_background))
+            window.navigationBarColor = resources.getColor(R.color.sparkle_button_grey)
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            window.statusBarColor = resources.getColor(R.color.sparkle_background)
         }
 
         // get all values
@@ -58,7 +58,7 @@ class OnboardingImage : AppCompatActivity() {
         // val device_id : String = "nieuwId123"
 
         // create api service
-         mAPIService = ApiUtils.getAPIService();
+         mAPIService = ApiUtils.getAPIService()
 
         Toast.makeText(applicationContext, "$firstName $gender $preference $date",Toast.LENGTH_LONG).show()
         // click image
@@ -77,17 +77,17 @@ class OnboardingImage : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data)
         if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
             val button = findViewById<Button>(R.id.button)
             val imageButton: ImageView = findViewById(R.id.imageView)
             // or get a single image only
             userImage = ImagePicker.getFirstImageOrNull(data).path
             Toast.makeText(applicationContext, userImage, Toast.LENGTH_SHORT).show()
-            GlideApp.with(this).load(userImage).into(imageButton);
+            GlideApp.with(this).load(userImage).into(imageButton)
             button.setBackgroundResource(R.drawable.onboard_button_green)
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                getWindow().setNavigationBarColor(getResources().getColor(R.color.sparkle_green))
+                window.navigationBarColor = resources.getColor(R.color.sparkle_green)
             }
         }
     }
@@ -96,15 +96,15 @@ class OnboardingImage : AppCompatActivity() {
         mAPIService?.saveUser(firstName, gender, device_id, preference, date)!!.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
 
-                if (response.isSuccessful()) {
+                if (response.isSuccessful) {
                     showResponse(response.body().toString())
                     Log.i( "pipo de clown","post submitted to API." + response.body().toString())
                     Toast.makeText(applicationContext, "created account", Toast.LENGTH_SHORT).show()
 
                     val preferencesHelper = PreferencesHelper(applicationContext)
-                    preferencesHelper.didOnboarding = true;
-                    preferencesHelper.deviceId = device_id;
-                    preferencesHelper.firstName = firstName;
+                    preferencesHelper.didOnboarding = true
+                    preferencesHelper.deviceId = device_id
+                    preferencesHelper.firstName = firstName
 
                     val i = Intent(applicationContext, MainActivity::class.java)
                     startActivity(i)
@@ -118,10 +118,10 @@ class OnboardingImage : AppCompatActivity() {
     }
 
     fun showResponse(response: String) {
-        if (mResponseTv?.getVisibility() === View.GONE) {
-            mResponseTv?.setVisibility(View.VISIBLE)
+        if (mResponseTv?.visibility === View.GONE) {
+            mResponseTv?.visibility = View.VISIBLE
         }
-        mResponseTv?.setText(response)
+        mResponseTv?.text = response
     }
 
 
