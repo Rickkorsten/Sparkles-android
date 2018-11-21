@@ -1,5 +1,6 @@
 package com.fhict.sparklesandroid.data.remote;
 import com.fhict.sparklesandroid.data.model.LoginResponse;
+import com.fhict.sparklesandroid.data.model.RelationResponse;
 import com.fhict.sparklesandroid.data.model.User;
 
 import java.io.Serializable;
@@ -32,4 +33,11 @@ public interface APIService {
 
     @GET("user/{id}")
     Call<User> getUser(@Path("id") String userId);
+
+    @GET(" search_match/{id}/{preference}/{language}")
+    Call<RelationResponse> searchAndSetRelation(@Path("id") String userId,
+                                                @Path("preference") String preference,
+                                                @Path("language") String language);
+
+
 }
