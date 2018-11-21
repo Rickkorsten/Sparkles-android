@@ -49,7 +49,7 @@ dependencies {
     implementation "com.airbnb.android:lottie:2.7.0"
     implementation 'com.auth0.android:jwtdecode:1.1.1'
     implementation 'com.github.stfalcon:chatkit:0.3.3'
-
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
 }
 repositories {
