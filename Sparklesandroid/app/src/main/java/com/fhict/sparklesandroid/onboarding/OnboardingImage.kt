@@ -104,7 +104,7 @@ class OnboardingImage : AppCompatActivity() {
                     val preferencesHelper = PreferencesHelper(applicationContext)
                     preferencesHelper.didOnboarding = true;
                     preferencesHelper.deviceId = device_id;
-                    preferencesHelper.firstName = firstName;
+                    // preferencesHelper.firstName = firstName;
 
                     val i = Intent(applicationContext, MainActivity::class.java)
                     startActivity(i)
