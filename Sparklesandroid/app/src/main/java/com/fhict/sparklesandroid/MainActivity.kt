@@ -112,6 +112,8 @@ class MainActivity : AppCompatActivity() {
         tabLayout!!.getTabAt(2)!!.setCustomView(linearLayout3)
     }
 
+
+
     fun login(firstName: String, device_id: String) {
         mAPIService?.loginUser(firstName, device_id )!!.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
