@@ -1,9 +1,7 @@
 package com.fhict.sparklesandroid.tabs
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatDelegate
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +41,7 @@ class Tab1Fragment : Fragment() {
 
             var name = user.firstName
             var nameAndDate = name + " (" + ")"
-            //nameTextView.text = user.toString()
+            nameTextView.text = nameAndDate
         }
 
         val darkSwitch = view!!.findViewById<Switch>(R.id.dark_switch)
