@@ -9,6 +9,7 @@ class PreferencesHelper(context: Context) {
         private val DEVICE_ID = "data.source.prefs.DEVICE_ID"
         private val FIRSTNAME = "data.source.prefs.FIRSTNAME"
         private val USER = "data.source.prefs.USER"
+        private val RELATION = "data.source.prefs.RELATION"
     }
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -28,4 +29,8 @@ class PreferencesHelper(context: Context) {
     // save user
     var user = preferences.getString(USER, "")
         set(value) = preferences.edit().putString(USER, value).apply()
+
+    // save relation
+    var relation = preferences.getString(RELATION, "")
+        set(value) = preferences.edit().putString(RELATION, value).apply()
 }

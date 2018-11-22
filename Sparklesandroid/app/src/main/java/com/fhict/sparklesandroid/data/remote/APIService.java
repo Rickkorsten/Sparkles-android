@@ -34,7 +34,7 @@ public interface APIService {
     @GET("user/{id}")
     Call<User> getUser(@Path("id") String userId);
 
-    @GET(" search_match/{id}/{preference}/{language}")
+    @GET("matching/search_match/{id}/{preference}/{language}")
     Call<RelationResponse> searchAndSetRelation(@Path("id") String userId,
                                                 @Path("preference") String preference,
                                                 @Path("language") String language);

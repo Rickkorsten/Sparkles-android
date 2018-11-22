@@ -10,9 +10,11 @@ import android.widget.Button
 import android.widget.Toast
 import com.fhict.sparklesandroid.PreferencesHelper
 import com.fhict.sparklesandroid.R
+import com.fhict.sparklesandroid.data.model.Relation
 import com.fhict.sparklesandroid.data.model.RelationResponse
 import com.fhict.sparklesandroid.data.model.User
 import com.fhict.sparklesandroid.data.remote.APIService
+import com.fhict.sparklesandroid.data.remote.ApiUtils
 import com.google.gson.Gson
 import org.intellij.lang.annotations.Language
 import retrofit2.Call
@@ -40,9 +42,15 @@ class NoRelationCardFragment : Fragment(){
         val preferencesHelper : PreferencesHelper = PreferencesHelper(view.context)
         val userpref = preferencesHelper.user
 
+        // create api service
+        mAPIService = ApiUtils.getAPIService()
+
         getRelationBtn.setOnClickListener{
             if (!userpref.isEmpty()) {
                 val user = gson.fromJson(userpref, User::class.java)
+                // Toast.makeText(view!!.context, user.id.toString() , Toast.LENGTH_LONG).show()
+                Toast.makeText(view!!.context, user.preference.toString() , Toast.LENGTH_LONG).show()
+                // Toast.makeText(view!!.context, user.language.toString() , Toast.LENGTH_LONG).show()
                searchAndSetRelation(user.id.toString(),user.preference.toString(),user.language.toString())
 
                // Toast.makeText(view!!.context,user.id.toString(), Toast.LENGTH_SHORT).show()
@@ -65,14 +73,10 @@ class NoRelationCardFragment : Fragment(){
                     val preferencesHelper = PreferencesHelper(view!!.context)
 
                     val gson = Gson()
-                    val userObjectString = gson.toJson(response.body()!!)
-                    preferencesHelper.user = userObjectString;
+                    val relationObjectString = gson.toJson(response.body()!!.getdata())
+                    preferencesHelper.relation = relationObjectString;
 
-                    // get shared preference and create object
-                    // val user = gson.fromJson(userObjectString, User::class.java)
-
-                    Toast.makeText(view!!.context, response.body()!!.toString(), Toast.LENGTH_SHORT).show()
-
+                    Toast.makeText(view!!.context, response.body()!!.getdata().toString(), Toast.LENGTH_SHORT).show()
                 }else {
                     Toast.makeText(view!!.context, "no response", Toast.LENGTH_SHORT).show()
                 }
