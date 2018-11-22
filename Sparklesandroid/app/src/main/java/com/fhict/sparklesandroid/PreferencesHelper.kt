@@ -9,7 +9,11 @@ class PreferencesHelper(context: Context) {
         private val DEVICE_ID = "data.source.prefs.DEVICE_ID"
         private val FIRSTNAME = "data.source.prefs.FIRSTNAME"
         private val USER = "data.source.prefs.USER"
+<<<<<<< HEAD
         private val RELATION = "data.source.prefs.RELATION"
+=======
+
+>>>>>>> 887cc1bc4b6118258883e1e005814f56ee12b827
     }
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)

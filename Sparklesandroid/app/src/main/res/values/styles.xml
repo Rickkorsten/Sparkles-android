@@ -22,6 +22,10 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+
         <item name="backgroundColorGreyBlack">#F9F9F9</item>
         <item name="colorBlackGrey">#000000</item>
         <item name="colorBlackWhite">#000000</item>
@@ -31,12 +35,17 @@
         <item name="sparkGreenBlack">#3BFFD1</item>
         <item name="sparkGreenWhite">#3BFFD1</item>
         <item name="borderColorGreyBlack">#EFEFEF</item>
+        <item name="borderColorTabBar">#F9F9F9</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
     <style name="DarkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
 
         <item name="backgroundColorGreyBlack">#000000</item>
         <item name="colorBlackGrey">#F9F9F9</item>
@@ -46,7 +55,8 @@
         <item name="sparkGreenOnly">#3BFFD1</item>
         <item name="sparkGreenBlack">#000000</item>
         <item name="sparkGreenWhite">#FFFFFF</item>
-        <item name="borderColorGreyBlack">#181818</item>
+        <item name="borderColorGreyBlack">#313131</item>
+        <item name="borderColorTabBar">#313131</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
 
     </style>

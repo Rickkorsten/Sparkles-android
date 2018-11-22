@@ -1,5 +1,7 @@
 package com.fhict.sparklesandroid
 
+import android.annotation.SuppressLint
+import android.annotation.TargetApi
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -19,7 +21,6 @@ import com.fhict.sparklesandroid.data.model.LoginResponse
 import com.fhict.sparklesandroid.data.model.User
 import com.fhict.sparklesandroid.data.remote.APIService
 import com.fhict.sparklesandroid.data.remote.ApiUtils
-import com.fhict.sparklesandroid.onboarding.OnboardingBirthday
 import com.fhict.sparklesandroid.onboarding.OnboardingWelcome
 import com.fhict.sparklesandroid.tabs.Tab1Fragment
 import com.fhict.sparklesandroid.tabs.Tab2Fragment
@@ -31,65 +32,36 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
+@Suppress("DEPRECATION", "RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class MainActivity : AppCompatActivity() {
 
     private var mAPIService: APIService? = null
-    private var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
-    val gson = Gson()
+    private val gson = Gson()
+    private var tabIndex: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.DarkTheme)
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.navigationBarColor = resources.getColor(R.color.black)
-                window.statusBarColor = resources.getColor(R.color.black)
-            }
-        }
-        else {
-            setTheme(R.style.AppTheme_NoTitleBar)
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.navigationBarColor = resources.getColor(R.color.sparkle_background)
-                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                window.statusBarColor = resources.getColor(R.color.sparkle_background)
-            }
-        }
+
+        setSparkTheme()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-
-        var darkSwitch = findViewById<Switch>(R.id.dark_switch)
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            darkSwitch.isChecked = true
-        } else{
-        }
-
-        darkSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                restartApp()
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                restartApp()
-            }
-        }
 
         viewPager = findViewById(R.id.container)
         setupViewPager(viewPager!!)
 
-        tabLayout = findViewById(R.id.tabs)
-
-        tabLayout!!.setupWithViewPager(viewPager)
-
-        val tabLayoutHome = findViewById<View>(R.id.tabs) as TabLayout
-        val tab = tabLayoutHome.getTabAt(1)
-        tab!!.select()
         // create api service
         mAPIService = ApiUtils.getAPIService()
 
+        newUserCheck()
+
+        setupCustomTabs()
+
+    }
+
+    private fun newUserCheck() {
         // check if app opens for first time
-        val preferencesHelper: PreferencesHelper = PreferencesHelper(this)
+        val preferencesHelper = PreferencesHelper(this)
         val didOnboard: Boolean = preferencesHelper.didOnboarding
         if (!didOnboard) {
             val i = Intent(this, OnboardingWelcome::class.java)
@@ -98,26 +70,57 @@ class MainActivity : AppCompatActivity() {
             val firstName = preferencesHelper.firstName
             val deviceId = preferencesHelper.deviceId
             //Toast.makeText(applicationContext, "$firstName + $deviceId", Toast.LENGTH_SHORT).show()
-            if (!firstName.isEmpty() || !deviceId.isEmpty()) {
-                // do something
+            // do something
+            if (!(firstName.isEmpty() && deviceId.isEmpty())) {
                 login(firstName, deviceId)
             }
 
         }
-
-        val tabLayout = findViewById<TabLayout>(R.id.tabs)
-        tabLayout.setupWithViewPager(viewPager)
-        tabLayout.setTabTextColors(R.color.black, R.color.sparkle_green)
-
     }
 
-    public fun restartApp() {
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private fun setSparkTheme() {
+
+        val preferencesHelper = PreferencesHelper(applicationContext)
+
+        if (preferencesHelper.darkMode) {
+            setTheme(R.style.DarkTheme)
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.navigationBarColor = resources.getColor(R.color.black)
+                window.statusBarColor = resources.getColor(R.color.black)
+            }
+        } else {
+            setTheme(R.style.AppTheme_NoTitleBar)
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.navigationBarColor = resources.getColor(R.color.sparkle_background)
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                window.statusBarColor = resources.getColor(R.color.sparkle_background)
+            }
+        }
+
+        if (preferencesHelper.darkModeChanged){
+            tabIndex = 0
+            preferencesHelper.darkModeChanged = false
+        }
+    }
+
+    public fun restartApp(tabIndex: Int) {
         val i = Intent(this, MainActivity::class.java)
         startActivity(i)
         finish()
     }
 
-    fun setupCustomTabs() {
+    @SuppressLint("InflateParams")
+    private fun setupCustomTabs() {
+
+        val tabLayout = findViewById<TabLayout>(R.id.tabs)
+        tabLayout.setupWithViewPager(viewPager)
+        tabLayout.setTabTextColors(R.color.black, R.color.sparkle_green)
+
+        val tabLayoutHome = findViewById<View>(R.id.tabs) as TabLayout
+        val tab = tabLayoutHome.getTabAt(tabIndex)
+        tab!!.select()
 
         val headerView = (getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
                 .inflate(R.layout.custom_tab, null, false)
@@ -132,11 +135,9 @@ class MainActivity : AppCompatActivity() {
         textView.text = user.firstName
 
         tabLayout!!.getTabAt(0)!!.customView = linearLayoutOne
-        tabLayout!!.getTabAt(1)!!.customView = linearLayout2
-        tabLayout!!.getTabAt(2)!!.customView = linearLayout3
+        tabLayout.getTabAt(1)!!.customView = linearLayout2
+        tabLayout.getTabAt(2)!!.customView = linearLayout3
     }
-
-
 
     private fun login(firstName: String, device_id: String) {
         mAPIService?.loginUser(firstName, device_id)!!.enqueue(object : Callback<LoginResponse> {
@@ -179,7 +180,7 @@ class MainActivity : AppCompatActivity() {
 
                     // get shared preference and create object
                     // val user = gson.fromJson(userObjectString, User::class.java)
-                    setupCustomTabs()
+                    //setupCustomTabs()
                     //Toast.makeText(applicationContext, response.body().toString(), Toast.LENGTH_LONG).show()
 
                 }

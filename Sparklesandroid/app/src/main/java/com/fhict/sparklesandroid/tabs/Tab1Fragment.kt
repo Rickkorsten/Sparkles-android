@@ -1,5 +1,6 @@
 package com.fhict.sparklesandroid.tabs
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatDelegate
@@ -14,7 +15,7 @@ import com.fhict.sparklesandroid.data.model.User
 import com.google.gson.Gson
 import java.util.*
 import android.content.res.Resources.Theme
-
+import com.fhict.sparklesandroid.MainActivity
 
 
 class Tab1Fragment : Fragment() {
@@ -45,6 +46,23 @@ class Tab1Fragment : Fragment() {
             //nameTextView.text = user.toString()
         }
 
+        val darkSwitch = view!!.findViewById<Switch>(R.id.dark_switch)
+        if (preferencesHelper.darkMode) {
+            darkSwitch.isChecked = true
+        }
+
+        darkSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                preferencesHelper.darkMode = true
+                preferencesHelper.darkModeChanged = true
+                (activity as MainActivity).restartApp(0)
+            } else {
+                preferencesHelper.darkMode = false
+                preferencesHelper.darkModeChanged = true
+                (activity as MainActivity).restartApp(0)
+            }
+        }
+
         return view
 
     }
@@ -65,4 +83,5 @@ class Tab1Fragment : Fragment() {
 
         return ageInt.toString()
     }
+
 }
