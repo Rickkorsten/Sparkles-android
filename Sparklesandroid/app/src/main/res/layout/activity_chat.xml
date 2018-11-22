@@ -4,6 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundColorGreyBlack"
     tools:context=".ChatActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/header_background"
+        android:paddingStart="40dp"
+        android:paddingTop="30dp"
+        android:paddingEnd="40dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="YOLANTE"
+            android:textColor="?attr/colorBlackGrey"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="40dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="43%"
+            android:gravity="end"
+            android:textColor="?attr/colorBlackGrey"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="40dp" />
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
