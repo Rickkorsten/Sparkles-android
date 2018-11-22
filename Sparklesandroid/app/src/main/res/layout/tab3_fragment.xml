@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/sparkle_background"
+    android:background="?attr/backgroundColorGreyBlack"
     >
 
     <ImageView
@@ -27,7 +27,7 @@
         android:fontFamily="@font/merriweather"
         android:gravity="center"
         android:text="Finish a spark and\nit will show up here."
-        android:textColor="#000"
+        android:textColor="?attr/colorBlackWhite"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

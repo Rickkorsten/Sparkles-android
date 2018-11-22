@@ -10,16 +10,16 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.os.Bundle
+import android.support.v7.app.AppCompatDelegate
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.fhict.sparklesandroid.data.model.LoginResponse
 import com.fhict.sparklesandroid.data.model.User
 import com.fhict.sparklesandroid.data.remote.APIService
 import com.fhict.sparklesandroid.data.remote.ApiUtils
+import com.fhict.sparklesandroid.onboarding.OnboardingBirthday
 import com.fhict.sparklesandroid.onboarding.OnboardingWelcome
 import com.fhict.sparklesandroid.tabs.Tab1Fragment
 import com.fhict.sparklesandroid.tabs.Tab2Fragment
@@ -39,13 +39,40 @@ class MainActivity : AppCompatActivity() {
     val gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkTheme)
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.navigationBarColor = resources.getColor(R.color.black)
+                window.statusBarColor = resources.getColor(R.color.black)
+            }
+        }
+        else {
+            setTheme(R.style.AppTheme_NoTitleBar)
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.navigationBarColor = resources.getColor(R.color.sparkle_background)
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                window.statusBarColor = resources.getColor(R.color.sparkle_background)
+            }
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.navigationBarColor = resources.getColor(R.color.sparkle_background)
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            window.statusBarColor = resources.getColor(R.color.sparkle_background)
+
+
+        var darkSwitch = findViewById<Switch>(R.id.dark_switch)
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            darkSwitch.isChecked = true
+        } else{
+        }
+
+        darkSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                restartApp()
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                restartApp()
+            }
         }
 
         viewPager = findViewById(R.id.container)
@@ -70,7 +97,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             val firstName = preferencesHelper.firstName
             val deviceId = preferencesHelper.deviceId
-            Toast.makeText(applicationContext, "$firstName + $deviceId", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(applicationContext, "$firstName + $deviceId", Toast.LENGTH_SHORT).show()
             if (!firstName.isEmpty() || !deviceId.isEmpty()) {
                 // do something
                 login(firstName, deviceId)
@@ -82,6 +109,12 @@ class MainActivity : AppCompatActivity() {
         tabLayout.setupWithViewPager(viewPager)
         tabLayout.setTabTextColors(R.color.black, R.color.sparkle_green)
 
+    }
+
+    public fun restartApp() {
+        val i = Intent(this, MainActivity::class.java)
+        startActivity(i)
+        finish()
     }
 
     fun setupCustomTabs() {
@@ -115,11 +148,11 @@ class MainActivity : AppCompatActivity() {
                     val jsonOb = JSONObject(decoded)
                     val userId = jsonOb.get("userId").toString()
 
-                    Toast.makeText(applicationContext, "login succes", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(applicationContext, "login succes", Toast.LENGTH_SHORT).show()
 
                     getUser(userId)
                 } else {
-                    Toast.makeText(applicationContext, "login failed", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(applicationContext, "login failed", Toast.LENGTH_SHORT).show()
                     val preferencesHelper = PreferencesHelper(applicationContext)
                     preferencesHelper.didOnboarding = false
                     val i = Intent(this@MainActivity, OnboardingWelcome::class.java)
@@ -147,7 +180,7 @@ class MainActivity : AppCompatActivity() {
                     // get shared preference and create object
                     // val user = gson.fromJson(userObjectString, User::class.java)
                     setupCustomTabs()
-                    Toast.makeText(applicationContext, response.body().toString(), Toast.LENGTH_LONG).show()
+                    //Toast.makeText(applicationContext, response.body().toString(), Toast.LENGTH_LONG).show()
 
                 }
             }

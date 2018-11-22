@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/merriweather"
             android:text="Tom Gielen"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorBlackWhite"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>

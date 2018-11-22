@@ -5,10 +5,10 @@
         />
     <stroke
         android:width="1dp"
-        android:color="@color/sparkle_border"
+        android:color="?attr/borderColorGreyBlack"
         />
     <solid
-        android:color="#ffffff"
+        android:color="?attr/colorWhiteGrey"
         />
     <padding
         android:left="0dp"
