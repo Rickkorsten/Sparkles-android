@@ -11,6 +11,7 @@
         app:shadowAlpha="0.6"
         app:shadowOffsetY="-10">
         <LinearLayout
+           android:id="@+id/messageClick"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="80dp"

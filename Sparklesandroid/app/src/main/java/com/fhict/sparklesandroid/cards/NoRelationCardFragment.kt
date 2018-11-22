@@ -71,11 +71,12 @@ class NoRelationCardFragment : Fragment(){
                 if (response.isSuccessful()) {
 
                     val preferencesHelper = PreferencesHelper(view!!.context)
+                    if (response.body()!!.confirmation == "match found and created new relation"){
+                        val gson = Gson()
+                        val relationObjectString = gson.toJson(response.body()!!.getdata())
+                        preferencesHelper.relation = relationObjectString;
 
-                    val gson = Gson()
-                    val relationObjectString = gson.toJson(response.body()!!.getdata())
-                    preferencesHelper.relation = relationObjectString;
-
+                    }
                     Toast.makeText(view!!.context, response.body()!!.getdata().toString(), Toast.LENGTH_SHORT).show()
                 }else {
                     Toast.makeText(view!!.context, "no response", Toast.LENGTH_SHORT).show()

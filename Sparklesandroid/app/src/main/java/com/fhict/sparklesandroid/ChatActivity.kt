@@ -1,4 +1,4 @@
-package com.fhict.sparklesandroid.onboarding
+package com.fhict.sparklesandroid
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
