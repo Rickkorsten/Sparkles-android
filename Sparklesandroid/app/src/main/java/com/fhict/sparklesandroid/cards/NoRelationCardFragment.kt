@@ -62,11 +62,6 @@ class NoRelationCardFragment : Fragment(){
            override fun onResponse(call: Call<RelationResponse>, response: Response<RelationResponse>) {
                 if (response.isSuccessful()) {
 
-                    val preferencesHelper = PreferencesHelper(view!!.context)
-
-                    val gson = Gson()
-                    val userObjectString = gson.toJson(response.body()!!)
-                    preferencesHelper.user = userObjectString;
 
                     // get shared preference and create object
                     // val user = gson.fromJson(userObjectString, User::class.java)
