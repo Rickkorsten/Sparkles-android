@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.bumptech.glide.Glide
@@ -33,10 +35,10 @@ class MatchCardFragment : Fragment() {
         val imageView = view.findViewById<ImageView>(R.id.iv_profilepic)
 
         val multi = MultiTransformation<Bitmap>(
-                BlurTransformation(25),
-                RoundedCornersTransformation(128, 1))
+                BlurTransformation(80),
+                RoundedCornersTransformation(60, 1))
 
-        Glide.with(this).load(R.drawable.bram)
+        Glide.with(this).load(R.drawable.selfie)
                 .apply(bitmapTransform(multi))
                 .into(imageView)
 
@@ -47,6 +49,8 @@ class MatchCardFragment : Fragment() {
             //i.putExtra("NAME", "$name")
             startActivity(i)
         }
+
+
 
         return view
     }
