@@ -9,11 +9,9 @@ class PreferencesHelper(context: Context) {
         private val DEVICE_ID = "data.source.prefs.DEVICE_ID"
         private val FIRSTNAME = "data.source.prefs.FIRSTNAME"
         private val USER = "data.source.prefs.USER"
-<<<<<<< HEAD
         private val RELATION = "data.source.prefs.RELATION"
-=======
-
->>>>>>> 887cc1bc4b6118258883e1e005814f56ee12b827
+        private val DARK_MODE = "data.source.prefs.DARK_MODE"
+        private val DARK_MODE_CHANGED = "data.source.prefs.DARK_MODE_CHANGED"
     }
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -21,6 +19,14 @@ class PreferencesHelper(context: Context) {
     // save onbaording
     var didOnboarding = preferences.getBoolean(DID_ONBOARDING,false)
         set(value) = preferences.edit().putBoolean(DID_ONBOARDING, value).apply()
+
+    // save darkmode
+    var darkMode = preferences.getBoolean(DARK_MODE,false)
+        set(value) = preferences.edit().putBoolean(DARK_MODE, value).apply()
+
+    // save darkmode_changed
+    var darkModeChanged = preferences.getBoolean(DARK_MODE_CHANGED,false)
+        set(value) = preferences.edit().putBoolean(DARK_MODE_CHANGED, value).apply()
 
     // save device_id
     var deviceId = preferences.getString(DEVICE_ID,"")
