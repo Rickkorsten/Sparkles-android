@@ -10,5 +10,7 @@
     </declare-styleable>
 
     <declare-styleable name="ds">
+        <attr name="metaButtonBarStyle" format="reference" />
+        <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
 </resources>
