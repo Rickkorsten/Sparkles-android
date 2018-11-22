@@ -63,6 +63,21 @@
     </LinearLayout>
 
     <Switch
+        android:id="@+id/location_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif"
+        android:paddingStart="40dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="40dp"
+        android:paddingBottom="15dp"
+        android:text="Only find SPARKS near me"
+        android:textColor="?attr/colorBlackWhite"
+        app:layout_constraintBottom_toTopOf="@+id/dark_switch" />
+
+    <Switch
         android:id="@+id/dark_switch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,7 +85,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif"
         android:paddingStart="40dp"
-        android:paddingTop="33dp"
+        android:paddingTop="15dp"
         android:paddingEnd="40dp"
         android:paddingBottom="20dp"
         android:text="Darkmode"

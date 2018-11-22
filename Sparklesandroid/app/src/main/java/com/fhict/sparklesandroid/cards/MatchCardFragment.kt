@@ -32,4 +32,6 @@ class MatchCardFragment : Fragment() {
 
         return view
     }
+
+
 }
