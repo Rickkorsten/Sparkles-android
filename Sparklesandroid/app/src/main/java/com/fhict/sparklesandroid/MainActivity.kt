@@ -34,7 +34,6 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private var mAPIService: APIService? = null
-    private var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
     private val gson = Gson()
 
@@ -50,17 +49,16 @@ class MainActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.container)
         setupViewPager(viewPager!!)
 
-        tabLayout = findViewById(R.id.tabs)
-
-        tabLayout!!.setupWithViewPager(viewPager)
-
-        val tabLayoutHome = findViewById<View>(R.id.tabs) as TabLayout
-        val tab = tabLayoutHome.getTabAt(1)
-        tab!!.select()
         // create api service
         mAPIService = ApiUtils.getAPIService()
 
+        newUserCheck()
 
+        setupCustomTabs()
+
+    }
+
+    private fun newUserCheck() {
         // check if app opens for first time
         val preferencesHelper: PreferencesHelper = PreferencesHelper(this)
         val didOnboard: Boolean = preferencesHelper.didOnboarding
@@ -77,13 +75,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-
-        val tabLayout = findViewById<TabLayout>(R.id.tabs)
-        tabLayout.setupWithViewPager(viewPager)
-        tabLayout.setTabTextColors(R.color.black, R.color.sparkle_green)
-
-        setupCustomTabs()
-
     }
 
     private fun darkModeSwitch() {
@@ -128,6 +119,14 @@ class MainActivity : AppCompatActivity() {
 
     fun setupCustomTabs() {
 
+        val tabLayout = findViewById<TabLayout>(R.id.tabs)
+        tabLayout.setupWithViewPager(viewPager)
+        tabLayout.setTabTextColors(R.color.black, R.color.sparkle_green)
+
+        val tabLayoutHome = findViewById<View>(R.id.tabs) as TabLayout
+        val tab = tabLayoutHome.getTabAt(1)
+        tab!!.select()
+
         val headerView = (getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
                 .inflate(R.layout.custom_tab, null, false)
 
@@ -137,7 +136,7 @@ class MainActivity : AppCompatActivity() {
         val linearLayout2 = headerView.findViewById<LinearLayout>(R.id.ll2)
         val linearLayout3 = headerView.findViewById<LinearLayout>(R.id.ll3)
 
-        val textView = headerView.findViewById<TextView>(R.id.name)
+        //val textView = headerView.findViewById<TextView>(R.id.name)
         //textView.text = user.firstName
 
         tabLayout!!.getTabAt(0)!!.customView = linearLayoutOne

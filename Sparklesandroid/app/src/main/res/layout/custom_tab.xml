@@ -41,6 +41,11 @@
             android:textColor="?attr/colorBlackWhite"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+        <!--<ImageView-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="33dp"-->
+            <!--android:src="@drawable/ic_spark_icon_tabbar"/>-->
     </LinearLayout>
 
     <LinearLayout
