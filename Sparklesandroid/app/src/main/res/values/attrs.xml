@@ -19,6 +19,8 @@
         <attr name="sparkGreenBlack" format="color" />
         <attr name="sparkGreenWhite" format="color" />
         <attr name="borderColorGreyBlack" format="color" />
+        <attr name="borderColorTabBar" format="color" />
+
 
     </declare-styleable>
 </resources>

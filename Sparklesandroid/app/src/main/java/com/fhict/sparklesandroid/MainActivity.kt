@@ -36,44 +36,16 @@ class MainActivity : AppCompatActivity() {
     private var mAPIService: APIService? = null
     private var tabLayout: TabLayout? = null
     var viewPager: ViewPager? = null
-    val gson = Gson()
+    private val gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.DarkTheme)
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.navigationBarColor = resources.getColor(R.color.black)
-                window.statusBarColor = resources.getColor(R.color.black)
-            }
-        }
-        else {
-            setTheme(R.style.AppTheme_NoTitleBar)
-            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.navigationBarColor = resources.getColor(R.color.sparkle_background)
-                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                window.statusBarColor = resources.getColor(R.color.sparkle_background)
-            }
-        }
+
+        setSparkTheme()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
-        var darkSwitch = findViewById<Switch>(R.id.dark_switch)
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            darkSwitch.isChecked = true
-        } else{
-        }
-
-        darkSwitch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                restartApp()
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                restartApp()
-            }
-        }
+        darkModeSwitch()
 
         viewPager = findViewById(R.id.container)
         setupViewPager(viewPager!!)
@@ -87,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         tab!!.select()
         // create api service
         mAPIService = ApiUtils.getAPIService()
+
 
         // check if app opens for first time
         val preferencesHelper: PreferencesHelper = PreferencesHelper(this)
@@ -109,6 +82,42 @@ class MainActivity : AppCompatActivity() {
         tabLayout.setupWithViewPager(viewPager)
         tabLayout.setTabTextColors(R.color.black, R.color.sparkle_green)
 
+        setupCustomTabs()
+
+    }
+
+    private fun darkModeSwitch() {
+        var darkSwitch = findViewById<Switch>(R.id.dark_switch)
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            darkSwitch.isChecked = true
+        }
+
+        darkSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                restartApp()
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                restartApp()
+            }
+        }
+    }
+
+    private fun setSparkTheme() {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkTheme)
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.navigationBarColor = resources.getColor(R.color.black)
+                window.statusBarColor = resources.getColor(R.color.black)
+            }
+        } else {
+            setTheme(R.style.AppTheme_NoTitleBar)
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.navigationBarColor = resources.getColor(R.color.sparkle_background)
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                window.statusBarColor = resources.getColor(R.color.sparkle_background)
+            }
+        }
     }
 
     public fun restartApp() {
@@ -129,13 +138,12 @@ class MainActivity : AppCompatActivity() {
         val linearLayout3 = headerView.findViewById<LinearLayout>(R.id.ll3)
 
         val textView = headerView.findViewById<TextView>(R.id.name)
-        textView.text = user.firstName
+        //textView.text = user.firstName
 
         tabLayout!!.getTabAt(0)!!.customView = linearLayoutOne
         tabLayout!!.getTabAt(1)!!.customView = linearLayout2
         tabLayout!!.getTabAt(2)!!.customView = linearLayout3
     }
-
 
 
     private fun login(firstName: String, device_id: String) {
@@ -179,7 +187,7 @@ class MainActivity : AppCompatActivity() {
 
                     // get shared preference and create object
                     // val user = gson.fromJson(userObjectString, User::class.java)
-                    setupCustomTabs()
+                    //setupCustomTabs()
                     //Toast.makeText(applicationContext, response.body().toString(), Toast.LENGTH_LONG).show()
 
                 }
