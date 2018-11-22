@@ -20,6 +20,7 @@
         <attr name="sparkGreenWhite" format="color" />
         <attr name="borderColorGreyBlack" format="color" />
         <attr name="borderColorTabBar" format="color" />
+        <attr name="matchCardDarker" format="color" />
 
 
     </declare-styleable>
