@@ -1,5 +1,6 @@
 package com.fhict.sparklesandroid.data.remote;
 import com.fhict.sparklesandroid.data.model.LoginResponse;
+import com.fhict.sparklesandroid.data.model.MessageResponse;
 import com.fhict.sparklesandroid.data.model.RelationResponse;
 import com.fhict.sparklesandroid.data.model.User;
 
@@ -38,6 +39,13 @@ public interface APIService {
     Call<RelationResponse> searchAndSetRelation(@Path("id") String userId,
                                                 @Path("preference") String preference,
                                                 @Path("language") String language);
+
+    @POST("message")
+    @FormUrlEncoded
+    Call <MessageResponse> addMessage(
+            @Field("user") String user,
+            @Field("text") String text,
+            @Field("relation_id") String relationId);
 
 
 }
