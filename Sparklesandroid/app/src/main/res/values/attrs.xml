@@ -10,7 +10,15 @@
     </declare-styleable>
 
     <declare-styleable name="ds">
-        <attr name="metaButtonBarStyle" format="reference" />
-        <attr name="metaButtonBarButtonStyle" format="reference" />
+        <attr name="backgroundColorGreyBlack" format="color" />
+        <attr name="colorBlackGrey" format="color" />
+        <attr name="colorBlackWhite" format="color" />
+        <attr name="colorWhiteBlack" format="color" />
+        <attr name="colorWhiteGrey" format="color" />
+        <attr name="sparkGreenOnly" format="color" />
+        <attr name="sparkGreenBlack" format="color" />
+        <attr name="sparkGreenWhite" format="color" />
+        <attr name="borderColorGreyBlack" format="color" />
+
     </declare-styleable>
 </resources>

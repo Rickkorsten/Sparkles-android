@@ -6,35 +6,53 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+        <item name="backgroundColorGreyBlack">#F9F9F9</item>
+        <item name="colorBlackGrey">#000000</item>
+        <item name="colorBlackWhite">#000000</item>
+        <item name="colorWhiteBlack">#FFFFFF</item>
+        <item name="sparkGreenOnly">#3BFFD1</item>
+        <item name="sparkGreenBlack">#3BFFD1</item>
+        <item name="sparkGreenWhite">#3BFFD1</item>
+        <item name="borderColorGreyBlack">#EFEFEF</item>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="FullscreenTheme" parent="AppTheme">
-        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@null</item>
-        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
-        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
-    </style>
-
-    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
     </style>
 
     <style name="AppTheme.NoTitleBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <item name="backgroundColorGreyBlack">#F9F9F9</item>
+        <item name="colorBlackGrey">#000000</item>
+        <item name="colorBlackWhite">#000000</item>
+        <item name="colorWhiteBlack">#FFFFFF</item>
+        <item name="colorWhiteGrey">#FFFFFF</item>
+        <item name="sparkGreenOnly">#3BFFD1</item>
+        <item name="sparkGreenBlack">#3BFFD1</item>
+        <item name="sparkGreenWhite">#3BFFD1</item>
+        <item name="borderColorGreyBlack">#EFEFEF</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
-    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">@color/sparkle_green</item>
+    <style name="DarkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="backgroundColorGreyBlack">#000000</item>
+        <item name="colorBlackGrey">#F9F9F9</item>
+        <item name="colorBlackWhite">#FFFFFF</item>
+        <item name="colorWhiteBlack">#000000</item>
+        <item name="colorWhiteGrey">#1a1a1a</item>
+        <item name="sparkGreenOnly">#3BFFD1</item>
+        <item name="sparkGreenBlack">#000000</item>
+        <item name="sparkGreenWhite">#FFFFFF</item>
+        <item name="borderColorGreyBlack">#181818</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+
+    </style>
+
+    <style name="WindowAnimationTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 </resources>

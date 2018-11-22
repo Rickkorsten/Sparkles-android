@@ -2,17 +2,23 @@ package com.fhict.sparklesandroid.tabs
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatDelegate
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Switch
 import android.widget.TextView
 import com.fhict.sparklesandroid.PreferencesHelper
 import com.fhict.sparklesandroid.R
 import com.fhict.sparklesandroid.data.model.User
 import com.google.gson.Gson
 import java.util.*
+import android.content.res.Resources.Theme
+
+
 
 class Tab1Fragment : Fragment() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +26,8 @@ class Tab1Fragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        val theme: Theme
 
         val view : View =  inflater!!.inflate(R.layout.tab1_fragment, container, false)
 
