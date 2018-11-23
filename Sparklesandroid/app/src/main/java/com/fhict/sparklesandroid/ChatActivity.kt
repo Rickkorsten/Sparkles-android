@@ -9,6 +9,8 @@ import android.util.Log
 
 import android.view.View
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.fhict.sparklesandroid.data.model.LoginResponse
 import com.fhict.sparklesandroid.data.model.MessageResponse
@@ -21,6 +23,7 @@ import com.google.gson.Gson
 import com.stfalcon.chatkit.messages.MessageInput
 import kotlinx.android.synthetic.main.activity_chat.*
 import org.json.JSONObject
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,37 +34,6 @@ class ChatActivity : AppCompatActivity() {
     private val gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_chat)
-
-        setSparkTheme()
-
-        // create api service
-        mAPIService = ApiUtils.getAPIService()
-
-        // get button
-        val sendMessage = findViewById<MessageInput>(R.id.input)
-
-        // get shared prefs
-        val preferencesHelper = PreferencesHelper(applicationContext)
-
-
-        val user = gson.fromJson(preferencesHelper.user, User::class.java)
-        val relation = gson.fromJson(preferencesHelper.relation, Relation::class.java)
-
-        sendMessage.setInputListener {
-            if (it.length > 1) {
-                Toast.makeText(this, it , Toast.LENGTH_SHORT).show()
-                addMessage(user.firstName,it.toString(),relation.id)
-            }
-            // adapter.addToStart(message, true)
-            true
-        }
-
-    }
-
-    @TargetApi(Build.VERSION_CODES.M)
-    private fun setSparkTheme() {
 
         val preferencesHelper = PreferencesHelper(applicationContext)
 
@@ -79,6 +51,40 @@ class ChatActivity : AppCompatActivity() {
                 window.statusBarColor = resources.getColor(R.color.sparkle_background)
             }
         }
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_chat)
+
+        // create api service
+        mAPIService = ApiUtils.getAPIService()
+
+        // get button
+        val sendMessage = findViewById<MessageInput>(R.id.input)
+
+        val user = gson.fromJson(preferencesHelper.user, User::class.java)
+        val relation = gson.fromJson(preferencesHelper.relation, Relation::class.java)
+
+        sendMessage.setInputListener {
+            if (it.length > 1) {
+                Toast.makeText(this, it , Toast.LENGTH_SHORT).show()
+                addMessage(user.firstName,it.toString(),relation.id)
+            }
+            // adapter.addToStart(message, true)
+            true
+        }
+
+        val sparkName = findViewById<TextView>(R.id.spark_name)
+
+        sparkName.setOnClickListener {
+            finish()
+        }
+
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private fun setSparkTheme() {
+
+
     }
 
     private fun addMessage(user: String, text: String, relationId: String) {

@@ -12,17 +12,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/header_background"
-        android:paddingStart="40dp"
+        android:paddingStart="15dp"
         android:paddingTop="30dp"
         android:paddingEnd="40dp"
         android:paddingBottom="20dp">
 
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/back"/>
+
+
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/spark_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:text="YOLANTE"
+            android:paddingEnd="20dp"
             android:textColor="?attr/colorBlackGrey"
+            android:paddingStart="25dp"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="40dp" />
@@ -45,7 +55,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="bottom"
-        app:inputHint="hint_enter_a_message"
+        app:inputHint="Type a message"
+        app:inputButtonDefaultBgColor="?attr/backgroundColorGreyBlack"
+        app:inputButtonDefaultBgDisabledColor="?attr/backgroundColorGreyBlack"
+        app:inputButtonIcon="@drawable/send"
+        app:inputButtonDefaultIconColor="?attr/sparkGreenOnly"
+        app:inputButtonDefaultIconDisabledColor="?attr/colorBlackWhite"
+        app:inputButtonDefaultIconPressedColor="?attr/sparkGreenOnly"
+        app:inputButtonHeight="30dp"
+        app:inputButtonMargin="16dp"
+        app:inputButtonWidth="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
