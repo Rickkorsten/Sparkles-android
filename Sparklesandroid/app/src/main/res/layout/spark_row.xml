@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@drawable/ripple"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="0dp"
+        android:src="@drawable/bram"
+        app:civ_border_color="?attr/borderColorGreyBlack"
+        app:civ_border_width="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif"
+        android:text="Bram"
+        android:textColor="?attr/colorBlackWhite"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif"
+        android:text="Hey hoe gaat het met jouw moeder?"
+        android:textColor="?attr/colorBlackWhite"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="20dp"
+        android:background="?attr/borderColorGreyBlack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+</android.support.constraint.ConstraintLayout>
