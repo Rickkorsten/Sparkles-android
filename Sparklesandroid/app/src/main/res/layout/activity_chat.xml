@@ -49,6 +49,14 @@
 
     </RelativeLayout>
 
+    <com.stfalcon.chatkit.messages.MessagesList
+        android:id="@+id/messagesList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/input"
+        app:layout_constraintBottom_toTopOf="@+id/input"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
     <com.stfalcon.chatkit.messages.MessageInput
         android:id="@+id/input"
         android:layout_width="match_parent"

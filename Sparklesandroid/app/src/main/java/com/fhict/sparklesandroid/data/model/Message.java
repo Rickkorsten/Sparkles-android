@@ -2,13 +2,14 @@ package com.fhict.sparklesandroid.data.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.stfalcon.chatkit.commons.models.IMessage;
 
 import java.util.Date;
 
 public class Message {
     @SerializedName("user")
     @Expose
-    private User user;
+    private Object user;
     @SerializedName("text")
     @Expose
     private String text;
@@ -24,11 +25,11 @@ public class Message {
 
 
 
-    public User getUser() {
+    public Object getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Object user) {
         this.user = user;
     }
 
@@ -63,6 +64,8 @@ public class Message {
     public void setId(String id) {
         this.id = id;
     }
+
+
 
 }
 
