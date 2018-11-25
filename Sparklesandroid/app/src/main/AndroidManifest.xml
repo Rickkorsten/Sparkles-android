@@ -32,7 +32,8 @@
         <activity
             android:name=".ChatActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoTitleBar"
+            android:theme="@style/AppTheme.NoTitleBar.NoAni"
+            android:fitsSystemWindows="true"
             android:windowSoftInputMode="adjustUnspecified">
         </activity>
         <activity

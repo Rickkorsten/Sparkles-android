@@ -1,6 +1,7 @@
 package com.fhict.sparklesandroid
 
 import android.annotation.TargetApi
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
@@ -18,6 +19,8 @@ import com.fhict.sparklesandroid.data.remote.APIService
 import com.fhict.sparklesandroid.data.remote.ApiUtils
 import com.fhict.sparklesandroid.onboarding.OnboardingWelcome
 import com.google.gson.Gson
+import com.jaeger.library.StatusBarUtil
+import com.r0adkll.slidr.Slidr
 import com.stfalcon.chatkit.commons.models.IMessage
 import com.stfalcon.chatkit.messages.MessageInput
 import com.stfalcon.chatkit.messages.MessagesListAdapter
@@ -39,13 +42,13 @@ class ChatActivity : AppCompatActivity() {
         val preferencesHelper = PreferencesHelper(applicationContext)
 
         if (preferencesHelper.darkMode) {
-            setTheme(R.style.DarkTheme)
+            setTheme(R.style.DarkTheme_NoAni)
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.navigationBarColor = resources.getColor(R.color.black)
                 window.statusBarColor = resources.getColor(R.color.black)
             }
         } else {
-            setTheme(R.style.AppTheme_NoTitleBar)
+            setTheme(R.style.AppTheme_NoTitleBar_NoAni)
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.navigationBarColor = resources.getColor(R.color.sparkle_background)
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -55,6 +58,12 @@ class ChatActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+
+        // Let activity slide
+        Slidr.attach(this)
+        StatusBarUtil.setTransparent(this)
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out)
+
 
         // create api service
         mAPIService = ApiUtils.getAPIService()

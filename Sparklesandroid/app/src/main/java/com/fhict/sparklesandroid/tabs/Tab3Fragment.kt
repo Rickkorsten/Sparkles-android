@@ -52,7 +52,7 @@ class Tab3Fragment: Fragment() {
             noSparks.visibility = View.VISIBLE
         } else
         {
-
+            noSparks.visibility = View.GONE
         }
 
 
