@@ -10,6 +10,7 @@ class PreferencesHelper(context: Context) {
         private val FIRSTNAME = "data.source.prefs.FIRSTNAME"
         private val USER = "data.source.prefs.USER"
         private val RELATION = "data.source.prefs.RELATION"
+        private val MAIN_SPARK = "data.source.prefs.MAIN_SPARK"
         private val DARK_MODE = "data.source.prefs.DARK_MODE"
         private val DARK_MODE_CHANGED = "data.source.prefs.DARK_MODE_CHANGED"
     }
@@ -43,4 +44,8 @@ class PreferencesHelper(context: Context) {
     // save relation
     var relation = preferences.getString(RELATION, "")
         set(value) = preferences.edit().putString(RELATION, value).apply()
+
+    // save relation
+    var mainSpark = preferences.getString(MAIN_SPARK, "")
+        set(value) = preferences.edit().putString(MAIN_SPARK, value).apply()
 }

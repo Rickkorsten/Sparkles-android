@@ -65,8 +65,9 @@ class ChatActivity : AppCompatActivity() {
         // get user date
         val user = gson.fromJson(preferencesHelper.user, MessageUser::class.java)
         val relation = gson.fromJson(preferencesHelper.relation, Relation::class.java)
+        val mainSpark = gson.fromJson(preferencesHelper.mainSpark, User::class.java)
 
-        Toast.makeText(applicationContext, user.toString(), Toast.LENGTH_LONG).show()
+
         // create adapter
         val adapter = MessagesListAdapter<IMessage>(user._id, null);
         messagesList.setAdapter(adapter);
@@ -90,11 +91,7 @@ class ChatActivity : AppCompatActivity() {
             finish()
         }
 
-    }
-
-    @TargetApi(Build.VERSION_CODES.M)
-    private fun setSparkTheme() {
-
+        sparkName.text = mainSpark.firstName
 
     }
 
@@ -125,7 +122,7 @@ class ChatActivity : AppCompatActivity() {
                     Log.i("addMessage", response.body().toString())
 
 
-                    Toast.makeText(applicationContext, "doet het", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, response.body().toString(), Toast.LENGTH_LONG).show()
 
                 } else {
                     // do something
@@ -135,6 +132,7 @@ class ChatActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<RelationResponse>, t: Throwable) {
                 Log.e("pipo de clown", t.message)
+                Toast.makeText(applicationContext, "shit", Toast.LENGTH_SHORT).show()
             }
         })
     }
