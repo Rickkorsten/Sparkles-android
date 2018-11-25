@@ -5,21 +5,14 @@ import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import com.fhict.sparklesandroid.R
 import com.fhict.sparklesandroid.SparksAdapter
 import kotlinx.android.synthetic.main.tab3_fragment.*
 
 class Tab3Fragment: Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -39,7 +32,7 @@ class Tab3Fragment: Fragment() {
 
         sparksRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (layoutManager.findFirstCompletelyVisibleItemPosition() === 0) {
+                if (layoutManager.findFirstCompletelyVisibleItemPosition() == 0) {
                     header.setBackgroundResource(R.drawable.header_background_no_border)
                 } else
                 {
@@ -48,7 +41,7 @@ class Tab3Fragment: Fragment() {
             }
         })
 
-        if (SparksAdapter().getItemCount() == 0){
+        if (SparksAdapter().itemCount == 0){
             noSparks.visibility = View.VISIBLE
         } else
         {

@@ -1,23 +1,16 @@
 package com.fhict.sparklesandroid
 
-import android.annotation.TargetApi
-import android.app.Activity
-import android.content.Intent
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Message
+import android.support.v4.content.ContextCompat
 import android.util.Log
-
 import android.view.View
-import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.fhict.sparklesandroid.data.model.*
 import com.fhict.sparklesandroid.data.remote.APIService
 import com.fhict.sparklesandroid.data.remote.ApiUtils
-import com.fhict.sparklesandroid.onboarding.OnboardingWelcome
 import com.google.gson.Gson
 import com.jaeger.library.StatusBarUtil
 import com.r0adkll.slidr.Slidr
@@ -25,12 +18,9 @@ import com.stfalcon.chatkit.commons.models.IMessage
 import com.stfalcon.chatkit.messages.MessageInput
 import com.stfalcon.chatkit.messages.MessagesListAdapter
 import kotlinx.android.synthetic.main.activity_chat.*
-import org.json.JSONObject
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 class ChatActivity : AppCompatActivity() {
 
@@ -44,15 +34,15 @@ class ChatActivity : AppCompatActivity() {
         if (preferencesHelper.darkMode) {
             setTheme(R.style.DarkTheme_NoAni)
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.navigationBarColor = resources.getColor(R.color.black)
-                window.statusBarColor = resources.getColor(R.color.black)
+                window.navigationBarColor = ContextCompat.getColor(this, R.color.black)
+                window.statusBarColor = ContextCompat.getColor(this, R.color.black)
             }
         } else {
             setTheme(R.style.AppTheme_NoTitleBar_NoAni)
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.navigationBarColor = resources.getColor(R.color.sparkle_background)
-                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                window.statusBarColor = resources.getColor(R.color.sparkle_background)
+                window.navigationBarColor = ContextCompat.getColor(this, R.color.sparkle_background)
+                //window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                window.statusBarColor = ContextCompat.getColor(this, R.color.sparkle_background)
             }
         }
 
@@ -78,8 +68,8 @@ class ChatActivity : AppCompatActivity() {
 
 
         // create adapter
-        val adapter = MessagesListAdapter<IMessage>(user._id, null);
-        messagesList.setAdapter(adapter);
+        val adapter = MessagesListAdapter<IMessage>(user._id, null)
+        messagesList.setAdapter(adapter)
 
         // get all messages
         getMessagesByRelationId(relation.id)

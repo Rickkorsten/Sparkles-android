@@ -12,23 +12,15 @@ import com.fhict.sparklesandroid.R
 import com.fhict.sparklesandroid.data.model.User
 import com.google.gson.Gson
 import java.util.*
-import android.content.res.Resources.Theme
 import com.fhict.sparklesandroid.MainActivity
 
 
 class Tab1Fragment : Fragment() {
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val theme: Theme
-
-        val view : View =  inflater!!.inflate(R.layout.tab1_fragment, container, false)
+        val view : View =  inflater.inflate(R.layout.tab1_fragment, container, false)
 
         val gson = Gson()
 
@@ -44,7 +36,7 @@ class Tab1Fragment : Fragment() {
             nameTextView.text = nameAndDate
         }
 
-        val darkSwitch = view!!.findViewById<Switch>(R.id.dark_switch)
+        val darkSwitch = view.findViewById<Switch>(R.id.dark_switch)
         if (preferencesHelper.darkMode) {
             darkSwitch.isChecked = true
         }

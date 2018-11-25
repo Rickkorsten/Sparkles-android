@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    public fun restartApp(tabIndex: Int) {
+    fun restartApp(tabIndex: Int) {
         val i = Intent(this, MainActivity::class.java)
         startActivity(i)
         finish()
