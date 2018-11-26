@@ -45,7 +45,8 @@ public interface APIService {
     @POST("message")
     @FormUrlEncoded
     Call <MessageResponse> addMessage(
-            @Field("user") MessageUser user,
+            @Field("user_id") String userId,
+            @Field("user_name") String userName,
             @Field("text") String text,
             @Field("relation_id") String relationId);
 

@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity() {
         val preferencesHelper = PreferencesHelper(applicationContext)
         val user = gson.fromJson(preferencesHelper.user, User::class.java)
         val relation = gson.fromJson(preferencesHelper.relation, Relation::class.java)
-        val mainSpark = gson.fromJson(preferencesHelper.mainSpark, User::class.java)
+        // val mainSpark = gson.fromJson(preferencesHelper.mainSpark, User::class.java)
 
         val linearLayoutOne = headerView.findViewById<LinearLayout>(R.id.ll)
         val linearLayout2 = headerView.findViewById<LinearLayout>(R.id.ll2)
@@ -147,7 +147,9 @@ class MainActivity : AppCompatActivity() {
 
         Toast.makeText(applicationContext, relation.progress.toString(), Toast.LENGTH_SHORT).show()
 
-        textView.text = mainSpark.firstName
+        //if (!mainSpark.firstName.isEmpty()){
+            textView.text = "rick"
+       // }
 
         tabLayout!!.getTabAt(0)!!.customView = linearLayoutOne
         tabLayout.getTabAt(1)!!.customView = linearLayout2
@@ -196,7 +198,7 @@ class MainActivity : AppCompatActivity() {
                     // get shared preference and create object
                     // val user = gson.fromJson(userObjectString, User::class.java)
                     //setupCustomTabs()
-                    //Toast.makeText(applicationContext, response.body().toString(), Toast.LENGTH_LONG).show()
+                    //Toast.makeText(applicationContext, response.body()!!.getCreationDate().toString(), Toast.LENGTH_LONG).show()
 
                 }
             }

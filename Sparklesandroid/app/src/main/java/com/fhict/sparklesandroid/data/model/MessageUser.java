@@ -10,6 +10,12 @@ public class MessageUser {
     @SerializedName("firstName")
     @Expose
     private String name;
+    @SerializedName("user_id")
+    @Expose
+    private String userId;
+    @SerializedName("user_name")
+    @Expose
+    private String userName;
 
     public String get_id() {
         return _id;
@@ -27,11 +33,11 @@ public class MessageUser {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "response{" +
-                "id='" + _id + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "response{" +
+//                "id='" + _id + '\'' +
+//                ", name='" + name + '\'' +
+//                '}';
+//    }
 }

@@ -62,14 +62,14 @@ class ChatActivity : AppCompatActivity() {
         val sendMessage = findViewById<MessageInput>(R.id.input)
 
         // get user date
-        val user = gson.fromJson(preferencesHelper.user, MessageUser::class.java)
+        val user = gson.fromJson(preferencesHelper.user, User::class.java)
         val relation = gson.fromJson(preferencesHelper.relation, Relation::class.java)
-        val mainSpark = gson.fromJson(preferencesHelper.mainSpark, User::class.java)
+        // val mainSpark = gson.fromJson(preferencesHelper.mainSpark, User::class.java)
 
 
         // create adapter
-        val adapter = MessagesListAdapter<IMessage>(user._id, null)
-        messagesList.setAdapter(adapter)
+        //val adapter = MessagesListAdapter<IMessage>(user._id, null)
+        //messagesList.setAdapter(adapter)
 
         // get all messages
         getMessagesByRelationId(relation.id)
@@ -78,7 +78,7 @@ class ChatActivity : AppCompatActivity() {
         sendMessage.setInputListener {
             if (it.length > 1) {
                 Toast.makeText(this, it , Toast.LENGTH_SHORT).show()
-                addMessage(user,it.toString(),relation.id)
+                addMessage(user.id.toString(),user.firstName.toString(),it.toString(),relation.id)
             }
             //adapter.addToStart(Message, true)
             true
@@ -90,18 +90,17 @@ class ChatActivity : AppCompatActivity() {
             finish()
         }
 
-        sparkName.text = mainSpark.firstName
-
+        // sparkName.text = mainSpark.firstName
     }
 
-    private fun addMessage(user: MessageUser, text: String, relationId: String) {
-        mAPIService?.addMessage(user, text, relationId)!!.enqueue(object : Callback<MessageResponse> {
+    private fun addMessage(userId: String,userName: String, text: String, relationId: String) {
+        mAPIService?.addMessage(userId, userName, text, relationId)!!.enqueue(object : Callback<MessageResponse> {
             override fun onResponse(call: Call<MessageResponse>, response: Response<MessageResponse>) {
                 if (response.isSuccessful) {
                     Log.i("addMessage", response.body().toString())
 
 
-                    Toast.makeText(applicationContext, response.body().toString(), Toast.LENGTH_LONG).show()
+                   // Toast.makeText(applicationContext, response.body().toString(), Toast.LENGTH_LONG).show()
 
                 } else {
                   // do something

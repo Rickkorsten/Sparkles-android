@@ -7,9 +7,6 @@ import com.stfalcon.chatkit.commons.models.IMessage;
 import java.util.Date;
 
 public class Message {
-    @SerializedName("user")
-    @Expose
-    private Object user;
     @SerializedName("text")
     @Expose
     private String text;
@@ -22,15 +19,29 @@ public class Message {
     @SerializedName("_id")
     @Expose
     private String id;
+    @SerializedName("user_id")
+    @Expose
+    private String userId;
+    @SerializedName("user_name")
+    @Expose
+    private String userName;
 
 
 
-    public Object getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser(Object user) {
-        this.user = user;
+    public void setUserId(String user) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getText() {

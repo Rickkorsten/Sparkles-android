@@ -4,9 +4,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.stfalcon.chatkit.commons.models.IUser;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
-public class User implements IUser {
+public class User {
     @SerializedName("lastName")
     @Expose
     private String lastName;
@@ -84,16 +85,6 @@ public class User implements IUser {
 
     public String getId() {
         return id;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    @Override
-    public String getAvatar() {
-        return null;
     }
 
     public void setId(String id) {
