@@ -1,16 +1,10 @@
 package com.fhict.sparklesandroid.data.remote;
 import com.fhict.sparklesandroid.data.model.LoginResponse;
-import com.fhict.sparklesandroid.data.model.Message;
 import com.fhict.sparklesandroid.data.model.MessageResponse;
-import com.fhict.sparklesandroid.data.model.MessageUser;
 import com.fhict.sparklesandroid.data.model.RelationResponse;
 import com.fhict.sparklesandroid.data.model.User;
-
-import java.io.Serializable;
 import java.util.Date;
-
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;

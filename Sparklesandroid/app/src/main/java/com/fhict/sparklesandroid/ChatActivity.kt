@@ -21,6 +21,9 @@ import kotlinx.android.synthetic.main.activity_chat.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.airbnb.lottie.LottieCompositionFactory.fromJson
+
+
 
 class ChatActivity : AppCompatActivity() {
 
@@ -119,9 +122,7 @@ class ChatActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     Log.i("addMessage", response.body().toString())
 
-
-                    Toast.makeText(applicationContext, response.body().toString(), Toast.LENGTH_LONG).show()
-
+                    Toast.makeText(applicationContext, response.body()!!.getdata().toString(), Toast.LENGTH_LONG).show()
                 } else {
                     // do something
                     Toast.makeText(applicationContext, "doet het niet", Toast.LENGTH_SHORT).show()
