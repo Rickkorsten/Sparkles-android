@@ -1,9 +1,12 @@
 package com.fhict.sparklesandroid.data.remote;
 import com.fhict.sparklesandroid.data.model.LoginResponse;
 import com.fhict.sparklesandroid.data.model.MessageResponse;
+import com.fhict.sparklesandroid.data.model.RelationMessagesResponse;
 import com.fhict.sparklesandroid.data.model.RelationResponse;
 import com.fhict.sparklesandroid.data.model.User;
 import java.util.Date;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -46,7 +49,7 @@ public interface APIService {
 
 
     @GET("relation/relation/{relation_id}")
-    Call<RelationResponse> getMessagesByRelationId(@Path("relation_id") String relationId);
+    Call <RelationMessagesResponse> getMessagesByRelationId(@Path("relation_id") String relationId);
 
 
 

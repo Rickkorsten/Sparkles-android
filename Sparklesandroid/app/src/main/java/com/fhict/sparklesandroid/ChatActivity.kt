@@ -117,19 +117,24 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun getMessagesByRelationId(relationId: String) {
-        mAPIService?.getMessagesByRelationId(relationId)!!.enqueue(object : Callback<RelationResponse> {
-            override fun onResponse(call: Call<RelationResponse>, response: Response<RelationResponse>) {
+        mAPIService?.getMessagesByRelationId(relationId)!!.enqueue(object : Callback<RelationMessagesResponse> {
+            override fun onResponse(call: Call<RelationMessagesResponse>, response: Response<RelationMessagesResponse>) {
                 if (response.isSuccessful) {
-                    Log.i("addMessage", response.body().toString())
 
-                    Toast.makeText(applicationContext, response.body()!!.getdata().toString(), Toast.LENGTH_LONG).show()
+                    Log.i("addMessage", response.body()!!.messagesList.toString())
+
+
+                    //Toast.makeText(applicationContext, response.body()!!.getdata(), Toast.LENGTH_LONG).show()
+//                    val messageObjectString = gson.toJson(response.body()!!.getdata())
+//                    val messagesList = gson.fromJson(messageObjectString, MessagesList::class.java)
+//                    Toast.makeText(applicationContext, messagesList.toString(), Toast.LENGTH_LONG).show()
                 } else {
                     // do something
                     Toast.makeText(applicationContext, "doet het niet", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<RelationResponse>, t: Throwable) {
+            override fun onFailure(call: Call<RelationMessagesResponse>, t: Throwable) {
                 Log.e("pipo de clown", t.message)
                 Toast.makeText(applicationContext, "shit", Toast.LENGTH_SHORT).show()
             }
