@@ -13,6 +13,7 @@ class PreferencesHelper(context: Context) {
         private val MAIN_SPARK = "data.source.prefs.MAIN_SPARK"
         private val DARK_MODE = "data.source.prefs.DARK_MODE"
         private val DARK_MODE_CHANGED = "data.source.prefs.DARK_MODE_CHANGED"
+        private val PASSED_RELATIONS_LIST = "data.source.prefs.DARK_MODE_CHANGED"
     }
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -48,4 +49,8 @@ class PreferencesHelper(context: Context) {
     // save relation
     var mainSpark = preferences.getString(MAIN_SPARK, "")
         set(value) = preferences.edit().putString(MAIN_SPARK, value).apply()
+
+    // save past_relation_list
+    var passedRelationList = preferences.getString(PASSED_RELATIONS_LIST, "")
+        set(value) = preferences.edit().putString(PASSED_RELATIONS_LIST, value).apply()
 }

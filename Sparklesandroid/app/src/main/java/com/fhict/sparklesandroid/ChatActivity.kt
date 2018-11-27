@@ -59,6 +59,8 @@ class ChatActivity : AppCompatActivity() {
         StatusBarUtil.setTransparent(this)
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out)
 
+        // Get relationID
+        val relationId = intent.getStringExtra(CustomViewHolder.RELATION_ID)
 
         // create api service
         mAPIService = ApiUtils.getAPIService()
@@ -76,15 +78,14 @@ class ChatActivity : AppCompatActivity() {
         adapter = MessagesListAdapter<IMessage>(user.id, null)
         messagesList.setAdapter(adapter)
 
-
         // get all messages
-        getMessagesByRelationId(relation.id)
+        getMessagesByRelationId(relationId)
 
         // on send message
         sendMessage.setInputListener {
             if (it.length > 1) {
                 Toast.makeText(this, it , Toast.LENGTH_SHORT).show()
-                addMessage(user.id.toString(),user.firstName.toString(),it.toString(),relation.id)
+                addMessage(user.id.toString(),user.firstName.toString(),it.toString(),relationId)
             }
             //adapter.addToStart(Message, true)
             true

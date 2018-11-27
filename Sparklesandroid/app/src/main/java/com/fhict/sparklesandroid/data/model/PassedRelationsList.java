@@ -4,13 +4,13 @@ import java.util.List;
 
 public class PassedRelationsList {
 
-    private List<Relation> relation;
+    private List<PassedRelation> relation;
 
-    public List<Relation> getMessage() {
+    public List<PassedRelation> getMessage() {
         return relation;
     }
 
-    public void setResult(List<Relation> relation) {
+    public void setResult(List<PassedRelation> relation) {
         this.relation = relation;
     }
 

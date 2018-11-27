@@ -11,7 +11,7 @@ public class PassedRelationsResponse {
     private String confirmation;
     @SerializedName("data")
     @Expose
-    private List<Relation> passedRelationsList;
+    private List<PassedRelation> passedRelationsList;
 
     public String getConfirmation() {
         return confirmation;
@@ -21,11 +21,11 @@ public class PassedRelationsResponse {
         this.confirmation = confirmation;
     }
 
-    public List<Relation> getPassedRelationsList() {
+    public List<PassedRelation> getPassedRelationsList() {
         return passedRelationsList;
     }
 
-    public void setPassedRelationsList(List<Relation> passedRelationsList) {
+    public void setPassedRelationsList(List<PassedRelation> passedRelationsList) {
         this.passedRelationsList = passedRelationsList;
     }
 
