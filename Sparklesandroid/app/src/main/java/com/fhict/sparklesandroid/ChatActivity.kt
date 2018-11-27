@@ -23,7 +23,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.airbnb.lottie.LottieCompositionFactory.fromJson
-
+import com.github.nkzawa.emitter.Emitter
+import com.github.nkzawa.socketio.client.IO
+import com.github.nkzawa.socketio.client.Socket
+import java.net.URISyntaxException
 
 
 class ChatActivity : AppCompatActivity() {
@@ -31,6 +34,8 @@ class ChatActivity : AppCompatActivity() {
     private var mAPIService: APIService? = null
     private val gson = Gson()
     private var adapter : MessagesListAdapter<IMessage>? = null
+    private var socket: Socket? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -53,6 +58,19 @@ class ChatActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
+
+        try {
+
+            //if you are using a phone device you should connect to same local network as your laptop and disable your pubic firewall as well
+            socket = IO.socket("https://sparklesapi.azurewebsites.net");
+            //create connection
+            socket!!.connect()
+            // emit the event join along side with the nickname
+            socket!!.emit("join", "rick");
+        } catch (e: URISyntaxException) {
+            e.printStackTrace();
+        }
+
 
         // Let activity slide
         Slidr.attach(this)
@@ -79,7 +97,9 @@ class ChatActivity : AppCompatActivity() {
         messagesList.setAdapter(adapter)
 
         // get all messages
-        getMessagesByRelationId(relationId)
+        socket!!.on("addMessage") {
+            getMessagesByRelationId(relationId)
+        }
 
         // on send message
         sendMessage.setInputListener {
@@ -120,24 +140,25 @@ class ChatActivity : AppCompatActivity() {
         })
     }
 
-    private fun getMessagesByRelationId(relationId: String) {
-        mAPIService?.getMessagesByRelationId(relationId)!!.enqueue(object : Callback<RelationMessagesResponse> {
-            override fun onResponse(call: Call<RelationMessagesResponse>, response: Response<RelationMessagesResponse>) {
-                if (response.isSuccessful) {
+        private fun getMessagesByRelationId(relationId: String) {
+            mAPIService?.getMessagesByRelationId(relationId)!!.enqueue(object : Callback<RelationMessagesResponse> {
+                override fun onResponse(call: Call<RelationMessagesResponse>, response: Response<RelationMessagesResponse>) {
+                    if (response.isSuccessful) {
 
-                    Log.i("addMessage", response.body()!!.messagesList.toString())
+                        Log.i("addMessage", response.body()!!.messagesList.toString())
 
-                    adapter?.addToEnd(response.body()!!.messagesList as List<IMessage>?,true)
+                        adapter?.addToEnd(response.body()!!.messagesList as List<IMessage>?, true)
 
-                } else {
-                    Toast.makeText(applicationContext, "no connection", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(applicationContext, "no connection", Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<RelationMessagesResponse>, t: Throwable) {
-                Log.e("pipo de clown", t.message)
-                Toast.makeText(applicationContext, "shit", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
+                override fun onFailure(call: Call<RelationMessagesResponse>, t: Throwable) {
+                    Log.e("pipo de clown", t.message)
+                    Toast.makeText(applicationContext, "shit", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
 }

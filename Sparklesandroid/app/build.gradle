@@ -52,7 +52,8 @@ dependencies {
     implementation 'com.github.stfalcon:chatkit:0.3.3'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.r0adkll:slidableactivity:2.0.6'
-    compile 'com.jaeger.statusbarutil:library:1.4.0'
+    implementation 'com.github.nkzawa:socket.io-client:0.3.0'
+    implementation 'com.jaeger.statusbarutil:library:1.4.0'
 
 
 
