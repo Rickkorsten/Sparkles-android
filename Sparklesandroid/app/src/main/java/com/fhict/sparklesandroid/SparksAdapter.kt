@@ -4,11 +4,15 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.fhict.sparklesandroid.tabs.PassedRelationList
+import kotlinx.android.synthetic.main.spark_row.view.*
 
-class SparksAdapter: RecyclerView.Adapter<CustomViewHolder>() {
+class SparksAdapter(val passedRelationList: PassedRelationList): RecyclerView.Adapter<CustomViewHolder>() {
+
+    val mockNames = listOf("Yolante", "Janinne", "Fenne", "Bertie", "Famke")
 
     override fun getItemCount(): Int {
-        return 10
+        return mockNames.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -17,12 +21,13 @@ class SparksAdapter: RecyclerView.Adapter<CustomViewHolder>() {
         return  CustomViewHolder(cellForRow)
     }
 
-    override fun onBindViewHolder(p0: CustomViewHolder, p1: Int) {
-
+    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+        val mockName = mockNames.get(position)
+        holder.view.textView_sparkName.text = mockName
     }
 
 }
 
-class CustomViewHolder(v: View): RecyclerView.ViewHolder(v) {
+class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view) {
 
 }

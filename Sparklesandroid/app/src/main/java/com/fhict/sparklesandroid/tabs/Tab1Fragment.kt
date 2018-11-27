@@ -13,6 +13,7 @@ import com.fhict.sparklesandroid.data.model.User
 import com.google.gson.Gson
 import java.util.*
 import com.fhict.sparklesandroid.MainActivity
+import kotlinx.android.synthetic.main.tab1_fragment.*
 
 
 class Tab1Fragment : Fragment() {
