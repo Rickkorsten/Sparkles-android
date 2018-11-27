@@ -1,16 +1,18 @@
 package com.fhict.sparklesandroid.data.model;
 
+import com.stfalcon.chatkit.commons.models.IMessage;
+
 import java.util.List;
 
 public class MessagesList {
 
-    private List<Message> message;
+    private List<IMessage> message;
 
-    public List<Message> getMessage() {
+    public List<IMessage> getMessage() {
         return message;
     }
 
-    public void setResult(List<Message> message) {
+    public void setResult(List<IMessage> message) {
         this.message = message;
     }
 

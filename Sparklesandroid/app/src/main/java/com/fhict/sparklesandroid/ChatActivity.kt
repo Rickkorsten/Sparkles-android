@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.View
+import android.widget.Adapter
 import android.widget.TextView
 import android.widget.Toast
 import com.fhict.sparklesandroid.data.model.*
@@ -29,6 +30,7 @@ class ChatActivity : AppCompatActivity() {
 
     private var mAPIService: APIService? = null
     private val gson = Gson()
+    private var adapter : MessagesListAdapter<IMessage>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -71,8 +73,9 @@ class ChatActivity : AppCompatActivity() {
 
 
         // create adapter
-        //val adapter = MessagesListAdapter<IMessage>(user._id, null)
-        //messagesList.setAdapter(adapter)
+        adapter = MessagesListAdapter<IMessage>(user.id, null)
+        messagesList.setAdapter(adapter)
+
 
         // get all messages
         getMessagesByRelationId(relation.id)
@@ -100,9 +103,9 @@ class ChatActivity : AppCompatActivity() {
         mAPIService?.addMessage(userId, userName, text, relationId)!!.enqueue(object : Callback<MessageResponse> {
             override fun onResponse(call: Call<MessageResponse>, response: Response<MessageResponse>) {
                 if (response.isSuccessful) {
-                    Log.i("addMessage", response.body().toString())
-
-
+                    Log.i("addMessage", response.body()?.message)
+                    adapter?.addToStart(response.body()?.createdMessage, true)
+                    // socket.io
                    // Toast.makeText(applicationContext, response.body().toString(), Toast.LENGTH_LONG).show()
 
                 } else {
@@ -123,14 +126,10 @@ class ChatActivity : AppCompatActivity() {
 
                     Log.i("addMessage", response.body()!!.messagesList.toString())
 
+                    adapter?.addToEnd(response.body()!!.messagesList as List<IMessage>?,true)
 
-                    //Toast.makeText(applicationContext, response.body()!!.getdata(), Toast.LENGTH_LONG).show()
-//                    val messageObjectString = gson.toJson(response.body()!!.getdata())
-//                    val messagesList = gson.fromJson(messageObjectString, MessagesList::class.java)
-//                    Toast.makeText(applicationContext, messagesList.toString(), Toast.LENGTH_LONG).show()
                 } else {
-                    // do something
-                    Toast.makeText(applicationContext, "doet het niet", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "no connection", Toast.LENGTH_SHORT).show()
                 }
             }
 

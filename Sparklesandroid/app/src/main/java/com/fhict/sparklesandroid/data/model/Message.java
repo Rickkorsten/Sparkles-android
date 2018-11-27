@@ -3,16 +3,17 @@ package com.fhict.sparklesandroid.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.stfalcon.chatkit.commons.models.IMessage;
+import com.stfalcon.chatkit.commons.models.IUser;
 
 import java.util.Date;
 
-public class Message {
+public class Message implements IMessage {
     @SerializedName("text")
     @Expose
     private String text;
     @SerializedName("createdAt")
     @Expose
-    private String createdAt;
+    private Date createdAt;
     @SerializedName("relation_id")
     @Expose
     private String relationId;
@@ -25,8 +26,18 @@ public class Message {
     @SerializedName("user_name")
     @Expose
     private String userName;
+    @SerializedName("user")
+    @Expose
+    private UserInfo user;
 
+    @Override
+    public UserInfo getUser() {
+        return user;
+    }
 
+    public void setUser(UserInfo user) {
+        this.user = user;
+    }
 
     public String getUserId() {
         return userId;
@@ -48,15 +59,13 @@ public class Message {
         return text;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
+    public void setText(String text) { this.text = text; }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 

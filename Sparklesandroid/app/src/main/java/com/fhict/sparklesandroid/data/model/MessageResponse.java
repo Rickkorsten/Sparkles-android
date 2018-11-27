@@ -9,7 +9,7 @@ public class MessageResponse {
     private String message;
     @SerializedName("createdMessage")
     @Expose
-    private Object createdMessage;
+    private Message createdMessage;
 
     public String getMessage() {
         return message;
@@ -19,19 +19,19 @@ public class MessageResponse {
         this.message = message;
     }
 
-    public Object getCreatedMessage() {
+    public Message getCreatedMessage() {
         return createdMessage;
     }
 
-    public void setCreatedMessage(Object createdMessage) {
+    public void setCreatedMessage(Message createdMessage) {
         this.createdMessage = createdMessage;
     }
 
-    @Override
-    public String toString() {
-        return "response{" +
-                "confirmation='" + message + '\'' +
-                ", data='" + createdMessage + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "response{" +
+//                "confirmation='" + message + '\'' +
+//                ", data='" + createdMessage + '\'' +
+//                '}';
+//    }
 }
