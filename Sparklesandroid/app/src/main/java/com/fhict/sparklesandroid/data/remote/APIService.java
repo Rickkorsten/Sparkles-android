@@ -51,6 +51,7 @@ public interface APIService {
     @GET("relation/relation/{relation_id}")
     Call <RelationMessagesResponse> getMessagesByRelationId(@Path("relation_id") String relationId);
 
-
+    @GET("relation/passed_relation/{id}")
+    Call<RelationResponse> getPassedRelations(@Path("id") String userId);
 
 }

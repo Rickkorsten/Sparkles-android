@@ -1,29 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundColorGreyBlack">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingTop="95dp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="95dp">
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/profile_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="40dp"
+                android:layout_marginStart="40dp"
                 android:src="@drawable/bram"
                 app:civ_border_color="?attr/borderColorGreyBlack"
                 app:civ_border_width="1dp" />
@@ -33,14 +25,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:orientation="vertical"
-                android:paddingLeft="20dp">
+                android:paddingStart="20dp"
+                android:paddingEnd="40dp">
 
                 <TextView
                     android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/merriweather"
-
                     android:text="Rick (21)"
                     android:textColor="?attr/colorBlackWhite"
                     android:textSize="20sp" />
@@ -50,23 +42,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="sans-serif"
-                    android:paddingEnd="40dp"
                     android:text="I am a nice guy who loves to play soccer and hang out with my friends"
                     android:textColor="?attr/colorBlackWhite"
                     android:textSize="14sp" />
 
-
             </LinearLayout>
+
         </LinearLayout>
-
-
-    </LinearLayout>
 
     <Switch
         android:id="@+id/location_switch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif"
         android:paddingStart="40dp"
@@ -81,7 +69,7 @@
         android:id="@+id/dark_switch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif"
         android:paddingStart="40dp"
@@ -150,4 +138,5 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

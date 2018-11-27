@@ -44,7 +44,7 @@ class ChatActivity : AppCompatActivity() {
             setTheme(R.style.AppTheme_NoTitleBar_NoAni)
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.navigationBarColor = ContextCompat.getColor(this, R.color.sparkle_background)
-                //window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                 window.statusBarColor = ContextCompat.getColor(this, R.color.sparkle_background)
             }
         }
