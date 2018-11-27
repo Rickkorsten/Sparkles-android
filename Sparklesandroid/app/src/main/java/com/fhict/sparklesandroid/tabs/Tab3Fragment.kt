@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.fhict.sparklesandroid.PreferencesHelper
 import com.fhict.sparklesandroid.R
 import com.fhict.sparklesandroid.SparksAdapter
+import com.fhict.sparklesandroid.data.model.PassedRelationsResponse
 import com.fhict.sparklesandroid.data.model.Relation
 import com.fhict.sparklesandroid.data.model.RelationResponse
 import com.fhict.sparklesandroid.data.model.User
@@ -70,35 +71,38 @@ class Tab3Fragment: Fragment() {
     }
 
     private fun getPassedRelations(relationId: String) {
-        mAPIService?.getPassedRelations(relationId)!!.enqueue(object : Callback<RelationResponse> {
-            override fun onResponse(call: Call<RelationResponse>, response: Response<RelationResponse>) {
+        mAPIService?.getPassedRelations(relationId)!!.enqueue(object : Callback<PassedRelationsResponse> {
+            override fun onResponse(call: Call<PassedRelationsResponse>, response: Response<PassedRelationsResponse>) {
                 if (response.isSuccessful) {
-                    val passedRelationString = gson.toJson(response.body()!!.getdata()).toString()
+                    val passedRelationString: List<Relation> = response.body()!!.passedRelationsList
                     //val passedRelationStingNoBrackets = passedRelationString.replace("[", "").replace("]","")
-                    Toast.makeText(activity, passedRelationString, Toast.LENGTH_LONG).show()
+                    //Toast.makeText(activity, passedRelationString, Toast.LENGTH_LONG).show()
 
                     println(passedRelationString)
 
 
-                    val passedRelationList = gson.fromJson(passedRelationString, PassedRelationList::class.java)
+                    //val passedRelationList = gson.fromJson(passedRelationString, PassedRelationList::class.java)
 
                     activity!!.runOnUiThread{
-                        sparksRecyclerView.adapter = SparksAdapter(passedRelationList)
+                        sparksRecyclerView.adapter = SparksAdapter(passedRelationString)
                     }
 
-//                    if (SparksAdapter().itemCount == 0){
-//                        noSparks.visibility = View.VISIBLE
-//                    } else
-//                    {
-//                        noSparks.visibility = View.GONE
-//                    }
+                    val noSparks = view!!.findViewById<ConstraintLayout>(R.id.no_sparks)
+
+
+                    if (SparksAdapter(passedRelationString).itemCount == 0){
+                        noSparks.visibility = View.VISIBLE
+                    } else
+                    {
+                        noSparks.visibility = View.GONE
+                    }
 
                 } else {
                     Toast.makeText(activity, "doet het niet", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<RelationResponse>, t: Throwable) {
+            override fun onFailure(call: Call<PassedRelationsResponse>, t: Throwable) {
                 Log.e("pipo de clown", t.message)
                 Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
             }
@@ -107,6 +111,6 @@ class Tab3Fragment: Fragment() {
 
 }
 
-class PassedRelationList(val relations: List<RelationItem>)
+class PassedRelationList(val relations: List<Relation>)
 
 class RelationItem(val _id: String, val progress: Int, val first_user_id: String, val second_user_id: String, val start_date: String, val status: String)

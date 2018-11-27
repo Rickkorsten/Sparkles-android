@@ -1,6 +1,7 @@
 package com.fhict.sparklesandroid.data.remote;
 import com.fhict.sparklesandroid.data.model.LoginResponse;
 import com.fhict.sparklesandroid.data.model.MessageResponse;
+import com.fhict.sparklesandroid.data.model.PassedRelationsResponse;
 import com.fhict.sparklesandroid.data.model.RelationMessagesResponse;
 import com.fhict.sparklesandroid.data.model.RelationResponse;
 import com.fhict.sparklesandroid.data.model.User;
@@ -52,6 +53,6 @@ public interface APIService {
     Call <RelationMessagesResponse> getMessagesByRelationId(@Path("relation_id") String relationId);
 
     @GET("relation/passed_relation/{id}")
-    Call<RelationResponse> getPassedRelations(@Path("id") String userId);
+    Call<PassedRelationsResponse> getPassedRelations(@Path("id") String userId);
 
 }
