@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.fhict.sparklesandroid.data.model.PassedRelation
-import com.fhict.sparklesandroid.data.model.Relation
 import com.fhict.sparklesandroid.data.model.User
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.spark_row.view.*

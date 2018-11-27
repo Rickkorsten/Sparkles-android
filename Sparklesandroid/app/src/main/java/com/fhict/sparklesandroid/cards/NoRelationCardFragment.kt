@@ -74,7 +74,7 @@ class NoRelationCardFragment : Fragment(){
                     if (response.body()!!.confirmation == "match found and created new relation"){
                         val gson = Gson()
                         val relationObjectString = gson.toJson(response.body()!!.getdata())
-                        preferencesHelper.relation = relationObjectString;
+                        preferencesHelper.relation = relationObjectString
 
                     }
                     Toast.makeText(view!!.context, response.body()!!.getdata().toString(), Toast.LENGTH_SHORT).show()

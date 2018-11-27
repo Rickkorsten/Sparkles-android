@@ -40,7 +40,7 @@ class OnboardingName : AppCompatActivity() {
                 startActivity(i)
 
 
-            }else{
+            } else {
                 Toast.makeText(applicationContext,"please give us your name!",Toast.LENGTH_SHORT).show()
             }
         }

@@ -128,7 +128,7 @@ class MainActivity : AppCompatActivity() {
 
         val preferencesHelper = PreferencesHelper(applicationContext)
         val user = gson.fromJson(preferencesHelper.user, User::class.java)
-        val relation = gson.fromJson(preferencesHelper.relation, Relation::class.java)
+        //val relation = gson.fromJson(preferencesHelper.relation, Relation::class.java)
         // val mainSpark = gson.fromJson(preferencesHelper.mainSpark, User::class.java)
 
         val linearLayoutOne = headerView.findViewById<LinearLayout>(R.id.ll)
@@ -139,13 +139,13 @@ class MainActivity : AppCompatActivity() {
 
         //Toast.makeText(applicationContext, relation.firstUserId, Toast.LENGTH_LONG).show()
         //Toast.makeText(applicationContext, user.id, Toast.LENGTH_LONG).show()
-        if ( user.id == relation.firstUserId ) {
-            setSparkUser(relation.secondUserId)
-        } else {
-            setSparkUser(relation.firstUserId)
-        }
+//        if ( user.id == relation.firstUserId ) {
+//            setSparkUser(relation.secondUserId)
+//        } else {
+//            setSparkUser(relation.firstUserId)
+//        }
 
-        Toast.makeText(applicationContext, relation.progress.toString(), Toast.LENGTH_SHORT).show()
+        //Toast.makeText(applicationContext, relation.progress.toString(), Toast.LENGTH_SHORT).show()
 
         //if (!mainSpark.firstName.isEmpty()){
             textView.text = "rick"

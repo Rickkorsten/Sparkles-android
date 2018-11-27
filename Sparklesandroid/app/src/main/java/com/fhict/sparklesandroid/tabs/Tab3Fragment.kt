@@ -5,11 +5,9 @@ import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.fhict.sparklesandroid.PreferencesHelper
 import com.fhict.sparklesandroid.R
 import com.fhict.sparklesandroid.SparksAdapter
@@ -42,7 +40,9 @@ class Tab3Fragment: Fragment() {
 
         // create api service
         mAPIService = ApiUtils.getAPIService()
-        getPassedRelations(user.id)
+        if (!preferencesHelper?.user!!.isEmpty()){
+            getPassedRelations(user.id)
+        }
 
         val layoutManager = LinearLayoutManager(activity)
 
@@ -59,15 +59,11 @@ class Tab3Fragment: Fragment() {
             }
         })
 
-
-
-
         return view
     }
 
     private fun getPassedRelations(relationId: String) {
 
-        val noSparks = view!!.findViewById<ConstraintLayout>(R.id.no_sparks)
 
         mAPIService?.getPassedRelations(relationId)!!.enqueue(object : Callback<PassedRelationsResponse> {
             override fun onResponse(call: Call<PassedRelationsResponse>, response: Response<PassedRelationsResponse>) {
@@ -75,11 +71,13 @@ class Tab3Fragment: Fragment() {
 
                     val passedRelationString = response.body()!!.passedRelationsList
 
-                    preferencesHelper?.passedRelationList = gson.toJson(response.body()!!.passedRelationsList)
+                    //preferencesHelper?.passedRelationList = gson.toJson(response.body()!!.passedRelationsList)
 
                     activity!!.runOnUiThread{
                         sparksRecyclerView.adapter = SparksAdapter(passedRelationString)
                     }
+
+                    val noSparks = view!!.findViewById<ConstraintLayout>(R.id.no_sparks)
 
                     if (SparksAdapter(passedRelationString).itemCount == 0){
                         noSparks.visibility = View.VISIBLE
@@ -89,13 +87,16 @@ class Tab3Fragment: Fragment() {
                     }
 
                 } else {
+                    val noSparks = view!!.findViewById<ConstraintLayout>(R.id.no_sparks)
+
                     noSparks.visibility = View.VISIBLE
                 }
             }
 
             override fun onFailure(call: Call<PassedRelationsResponse>, t: Throwable) {
-                noSparks.visibility = View.VISIBLE
+                val noSparks = view!!.findViewById<ConstraintLayout>(R.id.no_sparks)
 
+                noSparks.visibility = View.VISIBLE
             }
         })
     }
