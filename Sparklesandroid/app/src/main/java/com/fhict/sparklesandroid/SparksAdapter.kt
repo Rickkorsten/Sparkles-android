@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.fhict.sparklesandroid.data.model.PassedRelation
 import com.fhict.sparklesandroid.data.model.User
@@ -38,8 +39,10 @@ class SparksAdapter(val passedRelationList: List<PassedRelation>): RecyclerView.
 
         val relation = passedRelationList.get(position)
         val userImage = holder.view.passed_relation_profile_image
+        val sparkMessage = holder.view.textView_sparkMessage
 
-        if (user?.firstName == relation.firstUserId.firstName){
+
+        if (user?.id == relation.firstUserId.id){
             holder.view.textView_sparkName.text = relation.secondUserId.firstName
             Glide.with(holder?.view?.context).load(relation.secondUserId.userImage).into(userImage)
         } else {
@@ -48,6 +51,8 @@ class SparksAdapter(val passedRelationList: List<PassedRelation>): RecyclerView.
         }
 
         holder?.relationId = relation.id
+
+        sparkMessage.text = relation.message[0].text
 
     }
 

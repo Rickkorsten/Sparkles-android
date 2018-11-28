@@ -88,9 +88,10 @@ class ChatActivity : AppCompatActivity() {
 
         // get user date
         val user = gson.fromJson(preferencesHelper.user, User::class.java)
-        val relation = gson.fromJson(preferencesHelper.relation, Relation::class.java)
+        //val relation = gson.fromJson(preferencesHelper.relation, Relation::class.java)
         // val mainSpark = gson.fromJson(preferencesHelper.mainSpark, User::class.java)
 
+        Toast.makeText(this, preferencesHelper.relation, Toast.LENGTH_LONG).show()
 
         // create adapter
         adapter = MessagesListAdapter<IMessage>(user.id, null)
