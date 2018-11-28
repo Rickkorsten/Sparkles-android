@@ -45,14 +45,11 @@ class MatchCardFragment : Fragment() {
         preferencesHelper = PreferencesHelper(view.context)
         val user = gson.fromJson(preferencesHelper!!.user, User::class.java)
 
-        // getActiveRelations(user.id.toString())
-
         // create api service
         mAPIService = ApiUtils.getAPIService()
 
-<<<<<<< HEAD
-=======
->>>>>>> 1045190f08a67f055a738023ebb367dd0ba9bc8a
+        getActiveRelations(user.id)
+
         return view
     }
 
@@ -89,51 +86,6 @@ class MatchCardFragment : Fragment() {
 
     }
 
-    private fun searchAndSetRelation(id: String, preference: String, language: String ) {
-
-        mAPIService?.searchAndSetRelation(id,preference,language)!!.enqueue(object : Callback<RelationResponse> {
-
-
-            override fun onResponse(call: Call<RelationResponse>, response: Response<RelationResponse>) {
-                if (response.isSuccessful()) {
-
-                    val preferencesHelper = PreferencesHelper(view!!.context)
-                    if (response.body()!!.confirmation == "match found and created new relation"){
-                        val gson = Gson()
-                        val relationObjectString = gson.toJson(response.body()!!.getdata())
-                        preferencesHelper.relation = relationObjectString
-
-                        val user = gson.fromJson(preferencesHelper!!.user, User::class.java)
-                        val relation = gson.fromJson(preferencesHelper?.relation, Relation::class.java)
-
-                        if (user?.id == relation.firstUserId){
-                            getSparkInfo(relation.secondUserId)
-                        } else {
-                            getSparkInfo(relation.firstUserId)
-                        }
-
-                       // val toMessageButton = view.findViewById<LinearLayout>(R.id.messageClick)
-
-//                        toMessageButton.setOnClickListener {
-//                            val i = Intent(context, ChatActivity::class.java)
-//                            i.putExtra("RELATION_ID", relation.id)
-//                            startActivity(i)
-//                        }
-
-                    }
-                    Toast.makeText(view!!.context, response.body()!!.getdata().toString(), Toast.LENGTH_SHORT).show()
-                }else {
-                    Toast.makeText(view!!.context, "no response", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<RelationResponse>, t: Throwable) {
-                Log.e("pipo de clown",t.message)
-                Toast.makeText(view!!.context, "no response", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-
     private fun getActiveRelations(relationId: String) {
 
 
@@ -141,16 +93,33 @@ class MatchCardFragment : Fragment() {
             override fun onResponse(call: Call<RelationSingle>, response: Response<RelationSingle>) {
                 if (response.isSuccessful) {
 
-                    Toast.makeText(view!!.context, response.body().toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(view!!.context, response.body()!!.id, Toast.LENGTH_SHORT).show()
+
+                    val relation = response.body()!!
+
+                    val user = gson.fromJson(preferencesHelper!!.user, User::class.java)
+
+                    if (user?.id == relation.firstUserId.id){
+                        getSparkInfo(relation.secondUserId.id)
+                    } else {
+                        getSparkInfo(relation.firstUserId.id)
+                    }
+
+                    val toMessageButton = view!!.findViewById<LinearLayout>(R.id.messageClick)
+
+                        toMessageButton.setOnClickListener {
+                            val i = Intent(context, ChatActivity::class.java)
+                            i.putExtra("RELATION_ID", "${relation.id}")
+                            startActivity(i)
+                        }
+
 
 
                 }
             }
 
             override fun onFailure(call: Call<RelationSingle>, t: Throwable) {
-                val noSparks = view!!.findViewById<ConstraintLayout>(R.id.no_sparks)
-
-                noSparks.visibility = View.VISIBLE
+                Toast.makeText(view!!.context, t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }

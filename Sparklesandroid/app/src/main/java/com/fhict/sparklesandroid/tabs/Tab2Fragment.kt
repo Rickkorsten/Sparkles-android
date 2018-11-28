@@ -38,8 +38,6 @@ class Tab2Fragment : Fragment() {
             var relationStatus = user.status
             // Toast.makeText(view.context, relationStatus, Toast.LENGTH_SHORT).show()
 
-            relationStatus = "searching"
-
             when (relationStatus) {
                 "no_relation" -> transaction.replace(R.id.frameLayout, noRelationCardFragment).commit()
                 "in_relation" ->  transaction.replace(R.id.frameLayout, matchCardFragment).commit()

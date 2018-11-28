@@ -2,6 +2,7 @@ package com.fhict.sparklesandroid.data.remote;
 import com.fhict.sparklesandroid.data.model.LoginResponse;
 import com.fhict.sparklesandroid.data.model.MessageResponse;
 import com.fhict.sparklesandroid.data.model.PassedRelationsResponse;
+import com.fhict.sparklesandroid.data.model.Relation;
 import com.fhict.sparklesandroid.data.model.RelationMessagesResponse;
 import com.fhict.sparklesandroid.data.model.RelationResponse;
 import com.fhict.sparklesandroid.data.model.RelationSingle;
