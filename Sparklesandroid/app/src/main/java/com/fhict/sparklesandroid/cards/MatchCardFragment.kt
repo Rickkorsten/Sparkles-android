@@ -50,6 +50,9 @@ class MatchCardFragment : Fragment() {
         // create api service
         mAPIService = ApiUtils.getAPIService()
 
+<<<<<<< HEAD
+=======
+>>>>>>> 1045190f08a67f055a738023ebb367dd0ba9bc8a
         return view
     }
 
