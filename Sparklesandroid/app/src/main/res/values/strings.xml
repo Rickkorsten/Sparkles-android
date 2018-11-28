@@ -28,5 +28,7 @@
     <string name="onboarding_image_text">Let\s choose \nyour best picture.</string>
     <string name="onboarding_birthday_text">Tell us the day  you where born?</string>
     <string name="intro_text">The new way to \nblind date.</string>
+    <string name="no_relation_card_title">Let\'s start \na new spark</string>
+    <string name="we_are_finding_a_spark_for_you">We are finding \na spark for you</string>
 
 </resources>

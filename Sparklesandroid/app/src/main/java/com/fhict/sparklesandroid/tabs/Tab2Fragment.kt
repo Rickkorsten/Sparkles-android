@@ -35,8 +35,10 @@ class Tab2Fragment : Fragment() {
 
         if (!userpref.isEmpty()) {
             val user = gson.fromJson(userpref, User::class.java)
-            val relationStatus = user.status
+            var relationStatus = user.status
             // Toast.makeText(view.context, relationStatus, Toast.LENGTH_SHORT).show()
+
+            relationStatus = "searching"
 
             when (relationStatus) {
                 "no_relation" -> transaction.replace(R.id.frameLayout, noRelationCardFragment).commit()

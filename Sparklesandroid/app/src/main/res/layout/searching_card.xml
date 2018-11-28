@@ -20,12 +20,45 @@
             android:orientation="vertical"
             android:gravity="bottom"
             android:background="@drawable/no_relation_container">
-            <TextView
-                android:layout_marginBottom="70dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Searching..."/>
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="18dp"
+                    app:lottie_fileName="looking_animation.json"
+                    app:lottie_loop="true"
+                    app:layout_constraintBottom_toTopOf="@+id/textView5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:lottie_autoPlay="true"
+                    android:layout_marginTop="140dp"
+                    />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="40dp"
+                    android:fontFamily="@font/merriweather"
+                    android:gravity="center"
+                    android:text="@string/we_are_finding_a_spark_for_you"
+                    android:textColor="?attr/colorBlackWhite"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+            </android.support.constraint.ConstraintLayout>
         </LinearLayout>
     </com.sdsmdg.harjot.materialshadows.MaterialShadowViewWrapper>
 

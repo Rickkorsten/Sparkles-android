@@ -56,7 +56,6 @@ class MatchCardFragment : Fragment() {
             getSparkInfo(relation.firstUserId)
         }
 
-
         val toMessageButton = view.findViewById<LinearLayout>(R.id.messageClick)
 
         toMessageButton.setOnClickListener {

@@ -35,7 +35,6 @@ class SparksAdapter(val passedRelationList: List<PassedRelation>): RecyclerView.
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val mockName = mockNames.get(position)
 
         val relation = passedRelationList.get(position)
         val userImage = holder.view.passed_relation_profile_image
@@ -52,7 +51,11 @@ class SparksAdapter(val passedRelationList: List<PassedRelation>): RecyclerView.
 
         holder?.relationId = relation.id
 
-        sparkMessage.text = relation.message[0].text
+        if (relation.message.isNotEmpty()){
+            sparkMessage.text = relation.message[0].text
+        } else {
+            sparkMessage.text = "No messages"
+        }
 
     }
 

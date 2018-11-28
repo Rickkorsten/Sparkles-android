@@ -69,6 +69,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_above="@+id/input"
+        app:incomingDefaultBubbleColor="@color/white"
+        app:incomingTextLinkColor="@color/sparkle_green"
+        app:incomingDefaultBubbleSelectedColor="@color/sparkle_green"
+        app:incomingDefaultBubblePressedColor="@color/sparkle_green"
+        app:outcomingDefaultBubblePressedColor="@color/sparkle_green"
+        app:outcomingDefaultBubbleSelectedColor="@color/sparkle_green"
+        app:outcomingTextColor="@color/black"
+        app:outcomingTextLinkColor="@color/sparkle_green"
+        app:outcomingDefaultBubbleColor="?attr/borderColorGreyBlack"
         app:layout_constraintBottom_toTopOf="@+id/input"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
