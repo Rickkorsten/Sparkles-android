@@ -79,6 +79,7 @@ class ChatActivity : AppCompatActivity() {
 
         // Get relationID
         val relationId = intent.getStringExtra(CustomViewHolder.RELATION_ID)
+        Toast.makeText(this, relationId , Toast.LENGTH_SHORT).show()
 
         // create api service
         mAPIService = ApiUtils.getAPIService()
@@ -97,6 +98,8 @@ class ChatActivity : AppCompatActivity() {
         messagesList.setAdapter(adapter)
 
         // get all messages
+        getMessagesByRelationId(relationId)
+        
         socket!!.on("addMessage") {
             getMessagesByRelationId(relationId)
         }
@@ -104,7 +107,6 @@ class ChatActivity : AppCompatActivity() {
         // on send message
         sendMessage.setInputListener {
             if (it.length > 1) {
-                Toast.makeText(this, it , Toast.LENGTH_SHORT).show()
                 addMessage(user.id.toString(),user.firstName.toString(),it.toString(),relationId)
             }
             //adapter.addToStart(Message, true)

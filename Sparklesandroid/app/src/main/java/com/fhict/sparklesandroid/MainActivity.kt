@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         // check if app opens for first time
         val preferencesHelper = PreferencesHelper(this)
         val didOnboard: Boolean = preferencesHelper.didOnboarding
+
         if (!didOnboard) {
             val i = Intent(this, OnboardingWelcome::class.java)
             startActivity(i)
