@@ -79,7 +79,7 @@ class ChatActivity : AppCompatActivity() {
 
         // Get relationID
         val relationId = intent.getStringExtra(CustomViewHolder.RELATION_ID)
-        Toast.makeText(this, relationId , Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, relationId , Toast.LENGTH_SHORT).show()
 
         // create api service
         mAPIService = ApiUtils.getAPIService()
@@ -92,7 +92,7 @@ class ChatActivity : AppCompatActivity() {
         //val relation = gson.fromJson(preferencesHelper.relation, Relation::class.java)
         // val mainSpark = gson.fromJson(preferencesHelper.mainSpark, User::class.java)
 
-        Toast.makeText(this, preferencesHelper.relation, Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, preferencesHelper.relation, Toast.LENGTH_LONG).show()
 
         // create adapter
         adapter = MessagesListAdapter<IMessage>(user.id, null)
@@ -153,13 +153,13 @@ class ChatActivity : AppCompatActivity() {
                         adapter?.addToEnd(response.body()!!.messagesList as List<IMessage>?, true)
 
                     } else {
-                        Toast.makeText(applicationContext, "no connection", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(applicationContext, "no connection", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<RelationMessagesResponse>, t: Throwable) {
                     Log.e("pipo de clown", t.message)
-                    Toast.makeText(applicationContext, "shit", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(applicationContext, "shit", Toast.LENGTH_SHORT).show()
                 }
             })
         }

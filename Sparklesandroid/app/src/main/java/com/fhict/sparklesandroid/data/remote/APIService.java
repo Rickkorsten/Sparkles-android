@@ -4,6 +4,7 @@ import com.fhict.sparklesandroid.data.model.MessageResponse;
 import com.fhict.sparklesandroid.data.model.PassedRelationsResponse;
 import com.fhict.sparklesandroid.data.model.RelationMessagesResponse;
 import com.fhict.sparklesandroid.data.model.RelationResponse;
+import com.fhict.sparklesandroid.data.model.RelationSingle;
 import com.fhict.sparklesandroid.data.model.User;
 import java.util.Date;
 import java.util.List;
@@ -54,5 +55,8 @@ public interface APIService {
 
     @GET("relation/passed_relation/{id}")
     Call<PassedRelationsResponse> getPassedRelations(@Path("id") String userId);
+
+    @GET("relation/active_relation/{id}")
+    Call<RelationSingle> getActiveRelations(@Path("id") String userId);
 
 }
