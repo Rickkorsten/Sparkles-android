@@ -11,6 +11,8 @@ class PreferencesHelper(context: Context) {
         private val USER = "data.source.prefs.USER"
         private val RELATION = "data.source.prefs.RELATION"
         private val MAIN_SPARK = "data.source.prefs.MAIN_SPARK"
+        private val MAIN_SPARK_IMAGE = "data.source.prefs.MAIN_SPARK_IMAGE"
+        private val MAIN_SPARK_NAME = "data.source.prefs.MAIN_SPARK_NAME"
         private val DARK_MODE = "data.source.prefs.DARK_MODE"
         private val DARK_MODE_CHANGED = "data.source.prefs.DARK_MODE_CHANGED"
         private val PASSED_RELATIONS_LIST = "data.source.prefs.PASSED_RELATIONS_LIST"
@@ -49,6 +51,14 @@ class PreferencesHelper(context: Context) {
     // save relation
     var mainSpark = preferences.getString(MAIN_SPARK, "")
         set(value) = preferences.edit().putString(MAIN_SPARK, value).apply()
+
+    // save relation
+    var mainSparkImage = preferences.getString(MAIN_SPARK_IMAGE, "")
+        set(value) = preferences.edit().putString(MAIN_SPARK_IMAGE, value).apply()
+
+    // save relation
+    var mainSparkName = preferences.getString(MAIN_SPARK_NAME, "")
+        set(value) = preferences.edit().putString(MAIN_SPARK_NAME, value).apply()
 
     // save past_relation_list
     var passedRelationList = preferences.getString(PASSED_RELATIONS_LIST, "")

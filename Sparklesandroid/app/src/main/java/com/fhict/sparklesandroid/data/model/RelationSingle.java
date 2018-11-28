@@ -4,16 +4,11 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
-import java.util.List;
 
-public class PassedRelation {
+public class RelationSingle {
     @SerializedName("progress")
     @Expose
     private Integer progress;
-
-    @SerializedName("messages")
-    @Expose
-    private List<PassedMessage> messages;
 
     @SerializedName("_id")
     @Expose
@@ -43,14 +38,6 @@ public class PassedRelation {
         this.progress = progress;
     }
 
-    public List<PassedMessage> getMessage() {
-        return messages;
-    }
-
-    public void setMessage(List<PassedMessage> messages) {
-        this.messages = messages;
-    }
-
     public String getId() {
         return id;
     }
@@ -58,7 +45,6 @@ public class PassedRelation {
     public void setId(String id) {
         this.id = id;
     }
-
 
     public PassedRelationUser getFirstUserId() {
         return firstUserId;
@@ -72,9 +58,7 @@ public class PassedRelation {
         return secondUserId;
     }
 
-    public void setSecondUserId(PassedRelationUser secondUserId) {
-        this.secondUserId = secondUserId;
-    }
+    public void setSecondUserId(PassedRelationUser secondUserId) { this.secondUserId = secondUserId; }
 
     public Date getStartDate() {
         return startDate;
@@ -96,7 +80,6 @@ public class PassedRelation {
     public String toString() {
         return "Relation{" +
                 "progress='" + progress + '\'' +
-                ", message='" + messages + '\'' +
                 ", status='" + status + '\'' +
                 ", firstUserId=" + firstUserId +
                 ", secondUserId='" + secondUserId + '\'' +
