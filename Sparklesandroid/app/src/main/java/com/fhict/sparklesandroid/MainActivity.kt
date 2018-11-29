@@ -129,28 +129,16 @@ class MainActivity : AppCompatActivity() {
 
         val preferencesHelper = PreferencesHelper(applicationContext)
         val user = gson.fromJson(preferencesHelper.user, User::class.java)
-        //val relation = gson.fromJson(preferencesHelper.relation, Relation::class.java)
-        // val mainSpark = gson.fromJson(preferencesHelper.mainSpark, User::class.java)
 
         val linearLayoutOne = headerView.findViewById<LinearLayout>(R.id.ll)
         val linearLayout2 = headerView.findViewById<LinearLayout>(R.id.ll2)
         val linearLayout3 = headerView.findViewById<LinearLayout>(R.id.ll3)
 
-        val textView = headerView.findViewById<TextView>(R.id.name)
+        val mainSparkName = headerView.findViewById<TextView>(R.id.main_spark_name)
 
-        //Toast.makeText(applicationContext, relation.firstUserId, Toast.LENGTH_LONG).show()
-        //Toast.makeText(applicationContext, user.id, Toast.LENGTH_LONG).show()
-//        if ( user.id == relation.firstUserId ) {
-//            setSparkUser(relation.secondUserId)
-//        } else {
-//            setSparkUser(relation.firstUserId)
-//        }
-
-        //Toast.makeText(applicationContext, relation.progress.toString(), Toast.LENGTH_SHORT).show()
-
-        //if (!mainSpark.firstName.isEmpty()){
-            textView.text = "rick"
-       // }
+        if (preferencesHelper.mainSparkName.isNotBlank()){
+            mainSparkName.text = preferencesHelper.mainSparkName
+        }
 
         tabLayout!!.getTabAt(0)!!.customView = linearLayoutOne
         tabLayout.getTabAt(1)!!.customView = linearLayout2
@@ -166,12 +154,9 @@ class MainActivity : AppCompatActivity() {
                     val decoded = JWTUtils.decoded(response.body()!!.token)
                     val jsonOb = JSONObject(decoded)
                     val userId = jsonOb.get("userId").toString()
-
-                    //Toast.makeText(applicationContext, "login succes", Toast.LENGTH_SHORT).show()
-
                     getUser(userId)
+
                 } else {
-                    //Toast.makeText(applicationContext, "login failed", Toast.LENGTH_SHORT).show()
                     val preferencesHelper = PreferencesHelper(applicationContext)
                     preferencesHelper.didOnboarding = false
                     val i = Intent(this@MainActivity, OnboardingWelcome::class.java)
@@ -185,7 +170,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun getUser(userId: String) {
+    fun getUser(userId: String) {
         mAPIService?.getUser(userId)!!.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
@@ -195,33 +180,6 @@ class MainActivity : AppCompatActivity() {
                     val gson = Gson()
                     val userObjectString = gson.toJson(response.body()!!)
                     preferencesHelper.user = userObjectString
-
-                    // get shared preference and create object
-                    // val user = gson.fromJson(userObjectString, User::class.java)
-                    //setupCustomTabs()
-                    //Toast.makeText(applicationContext, response.body()!!.getCreationDate().toString(), Toast.LENGTH_LONG).show()
-
-                }
-            }
-
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.e("pipo de clown", t.message)
-            }
-        })
-    }
-
-    private fun setSparkUser(userId: String) {
-
-        mAPIService?.getUser(userId)!!.enqueue(object : Callback<User> {
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                if (response.isSuccessful) {
-
-
-                    val preferencesHelper = PreferencesHelper(applicationContext)
-
-                    val gson = Gson()
-                    preferencesHelper.mainSpark = gson.toJson(response.body()!!)
-
 
                 }
             }
@@ -236,7 +194,7 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(Tab1Fragment(), "")
-        adapter.addFragment(Tab2Fragment(), "")
+        adapter.addFragment(Tab2Fragment(), "fragment2")
         adapter.addFragment(Tab3Fragment(), "")
         viewPager.adapter = adapter
     }

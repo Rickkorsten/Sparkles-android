@@ -42,6 +42,7 @@ class Tab3Fragment: Fragment() {
         mAPIService = ApiUtils.getAPIService()
         if (!preferencesHelper?.user!!.isEmpty()){
             getPassedRelations(user.id)
+
         }
 
         val layoutManager = LinearLayoutManager(activity)

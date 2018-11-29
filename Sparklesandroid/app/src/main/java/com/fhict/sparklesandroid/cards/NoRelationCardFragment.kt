@@ -23,6 +23,7 @@ import retrofit2.Response
 
 class NoRelationCardFragment : Fragment(){
 
+    private val gson=Gson()
     private var mAPIService: APIService? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,13 +49,7 @@ class NoRelationCardFragment : Fragment(){
         getRelationBtn.setOnClickListener{
             if (!userpref.isEmpty()) {
                 val user = gson.fromJson(userpref, User::class.java)
-                // Toast.makeText(view!!.context, user.id.toString() , Toast.LENGTH_LONG).show()
-                Toast.makeText(view!!.context, user.preference.toString() , Toast.LENGTH_LONG).show()
-                // Toast.makeText(view!!.context, user.language.toString() , Toast.LENGTH_LONG).show()
                searchAndSetRelation(user.id.toString(),user.preference.toString(),user.language.toString())
-
-               // Toast.makeText(view!!.context,user.id.toString(), Toast.LENGTH_SHORT).show()
-
 
             }
         }
@@ -66,26 +61,22 @@ class NoRelationCardFragment : Fragment(){
 
        mAPIService?.searchAndSetRelation(id,preference,language)!!.enqueue(object : Callback<RelationResponse> {
 
-
            override fun onResponse(call: Call<RelationResponse>, response: Response<RelationResponse>) {
                 if (response.isSuccessful()) {
 
                     val preferencesHelper = PreferencesHelper(view!!.context)
+                    val user = gson.fromJson(preferencesHelper.user, User::class.java)
+                    val relationStatus = user.status
                     if (response.body()!!.confirmation == "match found and created new relation"){
                         val gson = Gson()
                         val relationObjectString = gson.toJson(response.body()!!.getdata())
                         preferencesHelper.relation = relationObjectString
-
                     }
-                    Toast.makeText(view!!.context, response.body()!!.getdata().toString(), Toast.LENGTH_SHORT).show()
-                }else {
-                    Toast.makeText(view!!.context, "no response", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<RelationResponse>, t: Throwable) {
                 Log.e("pipo de clown",t.message)
-                Toast.makeText(view!!.context, "no response", Toast.LENGTH_SHORT).show()
             }
         })
     }

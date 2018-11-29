@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
@@ -25,6 +26,7 @@ import com.fhict.sparklesandroid.data.remote.ApiUtils
 import com.google.gson.Gson
 import jp.wasabeef.glide.transformations.BlurTransformation
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
+import kotlinx.android.synthetic.main.custom_tab.*
 import kotlinx.android.synthetic.main.spark_row.view.*
 import kotlinx.android.synthetic.main.tab3_fragment.*
 import retrofit2.Call
@@ -33,20 +35,20 @@ import retrofit2.Response
 
 class MatchCardFragment : Fragment() {
 
-    private val gson = Gson()
-    private var mAPIService: APIService? = null
-    var preferencesHelper: PreferencesHelper? = null
+    private val gson=Gson()
+    private var mAPIService: APIService?=null
+    var preferencesHelper: PreferencesHelper?=null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view: View = inflater.inflate(R.layout.match_card, container, false)
+        val view: View=inflater.inflate(R.layout.match_card, container, false)
 
-        preferencesHelper = PreferencesHelper(view.context)
-        val user = gson.fromJson(preferencesHelper!!.user, User::class.java)
+        preferencesHelper=PreferencesHelper(view.context)
+        val user=gson.fromJson(preferencesHelper!!.user, User::class.java)
 
         // create api service
-        mAPIService = ApiUtils.getAPIService()
+        mAPIService=ApiUtils.getAPIService()
 
         getActiveRelations(user.id)
 
@@ -58,8 +60,8 @@ class MatchCardFragment : Fragment() {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
 
-                    preferencesHelper?.mainSparkName= response.body()!!.firstName
-                    preferencesHelper?.mainSparkImage= response.body()!!.userImage
+                    preferencesHelper?.mainSparkName=response.body()!!.firstName
+                    preferencesHelper?.mainSparkImage=response.body()!!.userImage
 
                     setMainSpark()
                 }
@@ -73,54 +75,44 @@ class MatchCardFragment : Fragment() {
 
     private fun setMainSpark() {
 
-        val imageView = view!!.findViewById<ImageView>(R.id.iv_profilepic)
+        val imageView=view!!.findViewById<ImageView>(R.id.iv_profilepic)
 
-        val multi = MultiTransformation<Bitmap>(
+        val multi=MultiTransformation<Bitmap>(
                 BlurTransformation(80),
                 RoundedCornersTransformation(60, 1))
+
 
         Glide.with(this).load(preferencesHelper?.mainSparkImage)
                 .apply(bitmapTransform(multi))
                 .into(imageView)
-
-
     }
 
     private fun getActiveRelations(relationId: String) {
-
 
         mAPIService?.getActiveRelations(relationId)!!.enqueue(object : Callback<RelationSingle> {
             override fun onResponse(call: Call<RelationSingle>, response: Response<RelationSingle>) {
                 if (response.isSuccessful) {
 
-                    Toast.makeText(view!!.context, response.body()!!.id, Toast.LENGTH_SHORT).show()
+                    val relation=response.body()!!
 
-                    val relation = response.body()!!
+                    val user=gson.fromJson(preferencesHelper!!.user, User::class.java)
 
-                    val user = gson.fromJson(preferencesHelper!!.user, User::class.java)
-
-                    if (user?.id == relation.firstUserId.id){
+                    if (user?.id == relation.firstUserId.id)
                         getSparkInfo(relation.secondUserId.id)
-                    } else {
+                    else
                         getSparkInfo(relation.firstUserId.id)
+
+                    val toMessageButton=view!!.findViewById<LinearLayout>(R.id.messageClick)
+
+                    toMessageButton.setOnClickListener {
+                        val i=Intent(context, ChatActivity::class.java)
+                        i.putExtra("RELATION_ID", relation.id)
+                        startActivity(i)
                     }
-
-                    val toMessageButton = view!!.findViewById<LinearLayout>(R.id.messageClick)
-
-                        toMessageButton.setOnClickListener {
-                            val i = Intent(context, ChatActivity::class.java)
-                            i.putExtra("RELATION_ID", "${relation.id}")
-                            startActivity(i)
-                        }
-
-
-
                 }
             }
 
-            override fun onFailure(call: Call<RelationSingle>, t: Throwable) {
-                Toast.makeText(view!!.context, t.message, Toast.LENGTH_SHORT).show()
-            }
+            override fun onFailure(call: Call<RelationSingle>, t: Throwable) { }
         })
     }
 }

@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.spark_row.view.*
 
 class SparksAdapter(val passedRelationList: List<PassedRelation>): RecyclerView.Adapter<CustomViewHolder>() {
 
-    val mockNames = listOf("Yolante", "Janinne", "Fenne", "Bertie", "Famke")
     var preferencesHelper: PreferencesHelper? = null
     private val gson = Gson()
     var user:User? = null
@@ -30,7 +29,6 @@ class SparksAdapter(val passedRelationList: List<PassedRelation>): RecyclerView.
         user = gson.fromJson(preferencesHelper!!.user, User::class.java)
 
         return  CustomViewHolder(cellForRow)
-
 
     }
 
@@ -64,7 +62,7 @@ class SparksAdapter(val passedRelationList: List<PassedRelation>): RecyclerView.
 class CustomViewHolder(val view: View, var relationId: String? = null): RecyclerView.ViewHolder(view) {
 
     companion object {
-        var RELATION_ID = "USER_ID"
+        var RELATION_ID = "RELATION_ID"
     }
 
     init {
